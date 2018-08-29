@@ -1,0 +1,11 @@
+.inbox-james-quarantine-sidebar-close.visible-md
+  a(href='', ng-click='$hide();close()')
+ul.nav.nav-pills.nav-stacked
+  .listview
+    .lv-body
+      .lv-item.clickable.menu-heading
+        i.mdi.mdi-format-list-checks
+        .menu-title #{__('Admin Quarantine')}
+      .lv-item.clickable.menu-item(href="", ui-sref="quarantine.settings", ui-sref-active="selected")
+        i.mdi.mdi-settings
+        .menu-title #{__('Settings')}

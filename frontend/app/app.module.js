@@ -1,4 +1,4 @@
-(function() {
+(function(angular) {
   'use strict';
 
   var MODULE_NAME = 'linagora.esn.unifiedinbox.james';
@@ -8,4 +8,4 @@
     'op.dynamicDirective',
     'restangular'
   ]);
-})();
+})(angular);

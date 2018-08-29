@@ -4,20 +4,20 @@
   angular.module('linagora.esn.unifiedinbox.james')
 
   .config(function($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.when('/quarantine', function($location, session) {
+    $urlRouterProvider.when('/dlp', function($location, session) {
       session.ready.then(function() {
         if (!session.userIsDomainAdministrator()) {
           return $location.path('/');
         }
 
-        return $location.path('/quarantine/settings');
+        return $location.path('/dlp/settings');
       });
     });
 
     $stateProvider
-      .state('quarantine', {
-        url: '/quarantine',
-        templateUrl: '/linagora.esn.unifiedinbox.james/app/quarantine/inbox-james-quarantine.html',
+      .state('dlp', {
+        url: '/dlp',
+        templateUrl: '/linagora.esn.unifiedinbox.james/app/dlp/inbox-james-dlp.html',
         resolve: {
           isAdmin: function($location, session) {
             return session.ready.then(function() {
@@ -26,11 +26,11 @@
           }
         }
       })
-      .state('quarantine.settings', {
+      .state('dlp.settings', {
         url: '/settings',
         views: {
-          'root@quarantine': {
-            template: '<inbox-james-quarantine-settings />'
+          'root@dlp': {
+            template: '<inbox-james-dlp-settings />'
           }
         }
       });

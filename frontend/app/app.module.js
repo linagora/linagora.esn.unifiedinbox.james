@@ -6,6 +6,11 @@
   angular.module(MODULE_NAME, [
     'ui.router',
     'op.dynamicDirective',
-    'restangular'
+    'restangular',
+    'uuid4',
+    'esn.session',
+    'esn.configuration',
+    'esn.async-action',
+    'linagora.esn.james'
   ]);
 })(angular);

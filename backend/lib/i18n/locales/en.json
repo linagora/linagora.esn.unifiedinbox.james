@@ -1,4 +1,18 @@
 {
   "Admin Quarantine": "Admin Quarantine",
-  "Settings": "Settings"
+  "Settings": "Settings",
+  "No rules, click": "No rules, click",
+  "to add a new one!": "to add a new one!",
+  "A problem occurred while getting rules, try refreshing this page!": "A problem occurred while getting rules, try refreshing this page!",
+  "Expression": "Expression",
+  "Regular expression to match contents of targets": "Regular expression to match contents of targets",
+  "Expression will be applied to:": "Expression will be applied to:",
+  "Sender": "Sender",
+  "Recipients": "Recipients",
+  "Content": "Content",
+  "Description": "Description",
+  "Storing rules...": "Storing rules...",
+  "Rules stored": "Rules stored",
+  "Failed to store rules": "Failed to store rules",
+  "Delete": "Delete"
 }

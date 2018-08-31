@@ -8,9 +8,15 @@
     'op.dynamicDirective',
     'restangular',
     'uuid4',
+    'ngFileSaver',
     'esn.session',
     'esn.configuration',
     'esn.async-action',
-    'linagora.esn.james'
+    'esn.lodash-wrapper',
+    'esn.user',
+    'esn.session',
+    'esn.infinite-list',
+    'linagora.esn.james',
+    'linagora.esn.unifiedinbox'
   ]);
 })(angular);

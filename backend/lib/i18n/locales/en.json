@@ -14,5 +14,10 @@
   "Storing rules...": "Storing rules...",
   "Rules stored": "Rules stored",
   "Failed to store rules": "Failed to store rules",
-  "Delete": "Delete"
+  "Delete": "Delete",
+  "Quarantine": "Quarantine",
+  "Cancel": "Cancel",
+  "Download (.eml)": "Download (.eml)",
+  "%s selected": "%s selected",
+  "No email": "No email"
 }

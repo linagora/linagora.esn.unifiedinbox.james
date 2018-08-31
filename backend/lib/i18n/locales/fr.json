@@ -1,4 +1,18 @@
 {
   "Admin Quarantine": "Zone de quarantaine administrative",
-  "Settings": "Paramètres"
+  "Settings": "Paramètres",
+  "No rules, click": "Aucune règles, cliquez sur",
+  "to add a new one!": "pour en ajouter une nouvelle!",
+  "A problem occurred while getting rules, try refreshing this page!": "Un problème est survenue en lisant les règles. Essayez de rafraîchir la page!",
+  "Expression": "Expression",
+  "Regular expression to match contents of targets": "Expression régulière pour identifier le contenu des cibles",
+  "Expression will be applied to:": "Expression régulière à appliquer à:",
+  "Sender": "Expéditeur",
+  "Recipients": "Destinataires",
+  "Content": "Contenu",
+  "Description": "Description",
+  "Storing rules...": "Stockage des règles...",
+  "Rules stored": "Règles stockées",
+  "Failed to store rules": "Echec lors du stockage des règles",
+  "Delete": "Effacer"
 }

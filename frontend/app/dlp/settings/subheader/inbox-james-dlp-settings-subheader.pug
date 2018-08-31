@@ -1,6 +1,9 @@
 extends /modules/subheader/responsive-subheader.pug
 
 block left
-  inbox-james-quarantine-subheader-burger-button
+  inbox-james-dlp-subheader-burger-button
   span.title.ellipsis
     | #{__('Settings')}
+
+block right
+  esn-subheader-save-button(on-click="$ctrl.onFormSubmit()", form="$ctrl.form")

@@ -1,4 +1,18 @@
 {
   "Admin Quarantine": "Quản lí vùng cách ly",
-  "Settings": "Cài đặt"
+  "Settings": "Cài đặt",
+  "No rules, click": "Chưa có luật, bấm",
+  "to add a new one!": "để thêm mới!",
+  "A problem occurred while getting rules, try refreshing this page!": "Có lỗi xảy ra, vui lòng tải lại trang!",
+  "Expression": "Biểu thức",
+  "Regular expression to match contents of targets": "Biểu thức chính quy để khớp với nội dung của đối tượng",
+  "Expression will be applied to:": "Biểu thức sẽ áp dụng cho:",
+  "Sender": "Người gửi",
+  "Recipients": "Người nhận",
+  "Content": "Nội dung",
+  "Description": "Mô tả",
+  "Storing rules...": "Đang lưu luật...",
+  "Rules stored": "Đã lưu luật",
+  "Failed to store rules": "Lưu luật thất bại",
+  "Delete": "Xóa"
 }

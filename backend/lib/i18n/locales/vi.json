@@ -14,5 +14,10 @@
   "Storing rules...": "Đang lưu luật...",
   "Rules stored": "Đã lưu luật",
   "Failed to store rules": "Lưu luật thất bại",
-  "Delete": "Xóa"
+  "Delete": "Xóa",
+  "Quarantine": "Cách ly",
+  "Cancel": "Hủy",
+  "Download (.eml)": "Tải về (.eml)",
+  "%s selected": "%s thư được chọn",
+  "No email": "Không có thư"
 }

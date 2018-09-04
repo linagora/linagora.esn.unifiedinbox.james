@@ -10,7 +10,7 @@
           return $location.path('/');
         }
 
-        return $location.path('/dlp/settings');
+        return $location.path('/dlp/quarantine');
       });
     });
 
@@ -23,6 +23,14 @@
             return session.ready.then(function() {
               if (!session.userIsDomainAdministrator()) { $location.path('/'); }
             });
+          }
+        }
+      })
+      .state('dlp.quarantine', {
+        url: '/quarantine',
+        views: {
+          'root@dlp': {
+            template: '<inbox-james-dlp-quarantine />'
           }
         }
       })

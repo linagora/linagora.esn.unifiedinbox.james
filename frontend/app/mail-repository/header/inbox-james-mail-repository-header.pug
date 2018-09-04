@@ -1,0 +1,10 @@
+.inbox-james-mail-repository-header-container
+  .select-all-emails(ng-click='$ctrl.toggleSelectAll()')
+    label.checkbox(ng-click='$event.preventDefault()')
+      input(
+        type='checkbox',
+        ng-model='$ctrl.selectedAllEmails'
+      )
+      i.input-helper
+  .selected-helper(ng-if="$ctrl.isSelecting()")
+    span #{__('%s selected', '{{ $ctrl.getNumberOfSelectedEmails() }}')}

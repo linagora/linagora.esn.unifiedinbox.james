@@ -1,0 +1,37 @@
+inbox-james-mail-repository-header {
+  .inbox-james-mail-repository-header-container {
+    .flex-vertical-centered;
+
+    height: 42px;
+    padding: 4px 7px;
+    background-color: @darkenBgColor;
+  }
+
+  .select-all-emails {
+    .all-centered;
+
+    width: 40px;
+    height: 40px;
+
+    .checkbox {
+      .clickable;
+
+      width: 17px;
+      height: 17px;
+    }
+  }
+
+  .selected-helper {
+    margin-left: 10px;
+    font-weight: 500;
+  }
+
+  @media (min-width: @screen-xl-min) {
+    .inbox-james-mail-repository-header-container {
+      .select-all-emails {
+        width: 28px;
+        height: 28px;
+      }
+    }
+  }
+}

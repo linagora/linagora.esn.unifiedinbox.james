@@ -14,5 +14,10 @@
   "Storing rules...": "Stockage des règles...",
   "Rules stored": "Règles stockées",
   "Failed to store rules": "Echec lors du stockage des règles",
-  "Delete": "Effacer"
+  "Delete": "Effacer",
+  "Quarantine": "Quarantaine",
+  "Cancel": "Annuler",
+  "Download (.eml)": "Télécharger (.eml)",
+  "%s selected": "%s sélectionnés",
+  "No email": "Pas d'email"
 }

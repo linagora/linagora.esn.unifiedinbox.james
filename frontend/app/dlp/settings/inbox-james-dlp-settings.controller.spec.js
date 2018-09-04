@@ -88,11 +88,12 @@ describe('The inboxJamesDlpSettingsController', function() {
     });
   });
 
-  describe('The onDeleteBtnClick function', function() {
-    it('should remove the correct rule', function() {
-      var form = {
-        $setDirty: sinon.spy()
+  describe('The onFormSubmit function', function() {
+    it('should call #jamesWebadminClient.storeDlpRules to store the qualified rules', function() {
+      jamesWebadminClient.listDlpRules = function() {
+        return $q.when([]);
       };
+      jamesWebadminClient.storeDlpRules = sinon.stub().returns($q.when());
       var rules = [{
         id: '1',
         expression: 'rule1',
@@ -106,7 +107,8 @@ describe('The inboxJamesDlpSettingsController', function() {
         explanation: 'Anything contains rule2',
         targetsSender: false,
         targetsRecipients: false,
-        targetsContent: true
+        targetsContent: true,
+        deleted: true
       }, {
         id: '3',
         expression: 'rule3',
@@ -115,37 +117,7 @@ describe('The inboxJamesDlpSettingsController', function() {
         targetsRecipients: false,
         targetsContent: true
       }];
-
-      jamesWebadminClient.listDlpRules = function() {
-        return $q.when(rules);
-      };
-
-      var controller = initController();
-
-      controller.onDeleteBtnClick(form, rules[1].id);
-
-      expect(controller.rules).to.deep.equal([
-        rules[0],
-        rules[2]
-      ]);
-      expect(form.$setDirty).to.have.been.calledOnce;
-    });
-  });
-
-  describe('The onFormSubmit function', function() {
-    it('should call #jamesWebadminClient.storeDlpRules to store rules', function() {
-      jamesWebadminClient.listDlpRules = function() {
-        return $q.when([]);
-      };
-      jamesWebadminClient.storeDlpRules = sinon.stub().returns($q.when());
-      var rules = [{
-        id: '1',
-        expression: 'rule',
-        explanation: 'Anything contains rule',
-        targetsSender: false,
-        targetsRecipients: false,
-        targetsContent: true
-      }];
+      var expectedRules = [rules[0], rules[2]];
       var controller = initController();
 
       controller.rules = rules;
@@ -153,7 +125,8 @@ describe('The inboxJamesDlpSettingsController', function() {
       controller.onFormSubmit();
       $rootScope.$digest();
 
-      expect(jamesWebadminClient.storeDlpRules).to.have.been.calledWith(DOMAIN_NAME, rules);
+      expect(jamesWebadminClient.storeDlpRules).to.have.been.calledWith(DOMAIN_NAME, expectedRules);
+      expect(controller.rules).to.deep.equal(expectedRules);
     });
   });
 });

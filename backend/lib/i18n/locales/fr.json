@@ -5,7 +5,7 @@
   "to add a new one!": "pour en ajouter une nouvelle!",
   "A problem occurred while getting rules, try refreshing this page!": "Un problème est survenue en lisant les règles. Essayez de rafraîchir la page!",
   "Expression": "Expression",
-  "Regular expression to match contents of targets": "Expression régulière pour identifier le contenu des cibles",
+  "Invalid expression": "Expression invalide ",
   "Expression will be applied to:": "Expression régulière à appliquer à:",
   "Sender": "Expéditeur",
   "Recipients": "Destinataires",
@@ -19,5 +19,11 @@
   "Cancel": "Annuler",
   "Download (.eml)": "Télécharger (.eml)",
   "%s selected": "%s sélectionnés",
-  "No email": "Pas d'email"
+  "No email": "Pas d'email",
+  "Test expression": "Tester l'expression",
+  "Enter sample data": "Saisir une expression à tester",
+  "Match": "Correspondance",
+  "No match": "Aucune correspondance",
+  "You are about to remove the rule \"%s\"": "Vous vous apprêtez à retirer la règle \"%s\"",
+  "Undo": "Annuler"
 }

@@ -17,8 +17,8 @@ form(name="form")
               | #{__('to add a new one!')}
         inbox-james-dlp-settings-rule-form(
           ng-repeat="rule in $ctrl.rules track by rule.id",
-          rule="rule",
-          on-delete-btn-click="$ctrl.onDeleteBtnClick(form, rule.id)")
+          rule="rule"
+        )
       fab(icon="plus", ng-click="$ctrl.addForm()")
 
     div(ng-switch-when="loading")

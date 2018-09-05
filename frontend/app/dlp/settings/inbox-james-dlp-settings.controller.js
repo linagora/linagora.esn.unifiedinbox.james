@@ -20,7 +20,6 @@
 
     self.$onInit = $onInit;
     self.addForm = addForm;
-    self.onDeleteBtnClick = onDeleteBtnClick;
     self.onFormSubmit = onFormSubmit;
 
     function $onInit() {
@@ -42,17 +41,22 @@
       });
     }
 
-    function onDeleteBtnClick(form, ruleId) {
-      self.rules = self.rules.filter(function(rule) {
-        return rule.id !== ruleId;
-      });
-      form.$setDirty();
-    }
-
     function onFormSubmit() {
+      self.rules = _qualifyRules(self.rules);
+
       return asyncAction(notificationMessages, function() {
         return jamesWebadminClient.storeDlpRules(DOMAIN_NAME, self.rules);
       });
+    }
+
+    function _qualifyRules(rules) {
+      return rules.map(function(rule) {
+        if (!rule.deleted) {
+          delete rule.deleted;
+
+          return rule;
+        }
+      }).filter(Boolean);
     }
   }
 })(angular);

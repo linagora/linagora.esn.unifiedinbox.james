@@ -5,7 +5,7 @@
   "to add a new one!": "to add a new one!",
   "A problem occurred while getting rules, try refreshing this page!": "A problem occurred while getting rules, try refreshing this page!",
   "Expression": "Expression",
-  "Regular expression to match contents of targets": "Regular expression to match contents of targets",
+  "Invalid expression": "Invalid expression",
   "Expression will be applied to:": "Expression will be applied to:",
   "Sender": "Sender",
   "Recipients": "Recipients",
@@ -19,5 +19,11 @@
   "Cancel": "Cancel",
   "Download (.eml)": "Download (.eml)",
   "%s selected": "%s selected",
-  "No email": "No email"
+  "No email": "No email",
+  "Test expression": "Test expression",
+  "Enter sample data": "Enter sample data",
+  "Match": "Match",
+  "No match": "No match",
+  "You are about to remove the rule \"%s\"": "You are about to remove the rule \"%s\"",
+  "Undo": "Undo"
 }

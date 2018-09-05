@@ -5,7 +5,7 @@
   "to add a new one!": "để thêm mới!",
   "A problem occurred while getting rules, try refreshing this page!": "Có lỗi xảy ra, vui lòng tải lại trang!",
   "Expression": "Biểu thức",
-  "Regular expression to match contents of targets": "Biểu thức chính quy để khớp với nội dung của đối tượng",
+  "Invalid expression": "Biểu thức không hợp lệ",
   "Expression will be applied to:": "Biểu thức sẽ áp dụng cho:",
   "Sender": "Người gửi",
   "Recipients": "Người nhận",
@@ -19,5 +19,11 @@
   "Cancel": "Hủy",
   "Download (.eml)": "Tải về (.eml)",
   "%s selected": "%s thư được chọn",
-  "No email": "Không có thư"
+  "No email": "Không có thư",
+  "Test expression": "Kiểm tra biểu thức",
+  "Enter sample data": "Nhập dữ liệu mẫu",
+  "Match": "Khớp",
+  "No match": "Không khớp",
+  "You are about to remove the rule \"%s\"": "Bạn chuẩn bị xóa luật \"%s\"",
+  "Undo": "Hủy"
 }

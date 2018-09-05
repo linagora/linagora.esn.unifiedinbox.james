@@ -34,6 +34,14 @@
           }
         }
       })
+      .state('dlp.rejected', {
+        url: '/rejected',
+        views: {
+          'root@dlp': {
+            template: '<inbox-james-dlp-rejected />'
+          }
+        }
+      })
       .state('dlp.settings', {
         url: '/settings',
         views: {

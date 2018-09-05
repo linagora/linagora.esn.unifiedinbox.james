@@ -4,25 +4,27 @@
 
 var expect = chai.expect;
 
-describe('The inboxJamesDlp service', function() {
-  var session, inboxJamesDlp;
+describe('The inboxJamesDlpService service', function() {
+  var session, inboxJamesDlpService;
 
   beforeEach(module('linagora.esn.unifiedinbox.james'));
 
-  beforeEach(inject(function(_inboxJamesDlp_, _session_) {
-    inboxJamesDlp = _inboxJamesDlp_;
+  beforeEach(inject(function(_inboxJamesDlpService_, _session_) {
+    inboxJamesDlpService = _inboxJamesDlpService_;
     session = _session_;
   }));
 
   describe('The getQuarantineMailRepositoryPath function', function() {
     it('should return the mail repository path based on current domain', function() {
+      var pathPrefix = 'prefix';
+
       session.domain = {
         name: 'toto.ln'
       };
 
-      var path = inboxJamesDlp.getQuarantineMailRepositoryPath();
+      var path = inboxJamesDlpService.getMailRepositoryPath(pathPrefix);
 
-      expect(path).to.equal('var/mail/dlp/quarantine/toto.ln');
+      expect(path).to.equal(pathPrefix + '/' + session.domain.name);
     });
   });
 });

@@ -5,14 +5,15 @@
     .controller('inboxJamesDlpQuarantineController', inboxJamesDlpQuarantineController);
 
   function inboxJamesDlpQuarantineController(
-    inboxJamesDlp
+    inboxJamesDlpService,
+    INBOX_JAMES_DLP_MAIL_REPOSITORY_PATH_PREFIXES
   ) {
     var self = this;
 
     self.$onInit = $onInit;
 
     function $onInit() {
-      self.quarantineRepositoryPath = inboxJamesDlp.getQuarantineMailRepositoryPath();
+      self.mailRepositoryPath = inboxJamesDlpService.getMailRepositoryPath(INBOX_JAMES_DLP_MAIL_REPOSITORY_PATH_PREFIXES.QUARANTINE);
     }
   }
 })(angular);

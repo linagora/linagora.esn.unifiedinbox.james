@@ -2,17 +2,15 @@
   'use strict';
 
   angular.module('linagora.esn.unifiedinbox.james')
-    .factory('inboxJamesDlp', inboxJamesDlp);
+    .factory('inboxJamesDlpService', inboxJamesDlpService);
 
-  function inboxJamesDlp(
-    session
-  ) {
+  function inboxJamesDlpService(session) {
     return {
-      getQuarantineMailRepositoryPath: getQuarantineMailRepositoryPath
+      getMailRepositoryPath: getMailRepositoryPath
     };
 
-    function getQuarantineMailRepositoryPath() {
-      return ['var/mail/dlp/quarantine', session.domain.name].join('/');
+    function getMailRepositoryPath(pathPrefix) {
+      return pathPrefix + '/' + session.domain.name;
     }
   }
 })(angular);

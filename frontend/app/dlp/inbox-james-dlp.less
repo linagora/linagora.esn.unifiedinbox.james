@@ -1,8 +1,21 @@
-@import './sidebar/inbox-james-dlp-sidebar';
 @import './settings/inbox-james-dlp-settings';
 
-.inbox-james-dlp-root {
-  & > .col-md-3, & > .col-md-8 {
-    margin-top: 45px;
+inbox-james-dlp {
+  .lv-body {
+    &.toggled {
+      i.mdi-menu-down {
+        .rotateZ3d(-90deg);
+      }
+    }
+
+    .badge-container {
+      margin-right: 0;
+    }
+
+    .menu-sub-item {
+      .menu-title {
+        margin-left: 10px;
+      }
+    }
   }
 }

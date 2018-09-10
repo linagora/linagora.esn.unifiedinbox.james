@@ -1,5 +1,19 @@
-.inbox-james-dlp-root.full-width.row.no-padding-xs(sub-header-aware)
-  .col-md-3.col-xl-2.hidden-xs
-    inbox-james-dlp-sidebar
-  .col-md-8.col-xl-10.col-xs-12.no-padding-xs
-    .ui-view(name="root", noanimation)
+.listview(ng-if="$ctrl.displayIn === 'domain'")
+  .lv-body
+    .lv-item.clickable.menu-item.flex(esn-toggle, toggled="true")
+      i.mdi.mdi-format-list-checks
+      .menu-title #{__('Quarantine')}
+      .flex-grow
+        .badge-container.flex-end
+          .caret-submenu
+            i.mdi.mdi-menu-down
+    ul
+      .lv-item.clickable.menu-sub-item(ui-sref="admin.domain.dlp.quarantine", ui-sref-active="selected")
+        i.mdi.mdi-email
+        .menu-title #{__('Quarantined')}
+      .lv-item.clickable.menu-sub-item(ui-sref="admin.domain.dlp.rejected", ui-sref-active="selected")
+        i.mdi.mdi-close-circle
+        .menu-title #{__('Rejected')}
+      .lv-item.clickable.menu-sub-item(ui-sref="admin.domain.dlp.settings", ui-sref-active="selected")
+        i.mdi.mdi-settings
+        .menu-title #{__('Settings')}

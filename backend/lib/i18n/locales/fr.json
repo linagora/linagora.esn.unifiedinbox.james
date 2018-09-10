@@ -26,5 +26,6 @@
   "No match": "Aucune correspondance",
   "You are about to remove the rule \"%s\"": "Vous vous apprêtez à retirer la règle \"%s\"",
   "Undo": "Annuler",
-  "Rejected": "Rejeté"
+  "Rejected": "Rejeté",
+  "Quarantined": "En quarantaine"
 }

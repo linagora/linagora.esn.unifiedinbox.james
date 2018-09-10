@@ -65,6 +65,8 @@ describe('The inboxJamesMailRepository service', function() {
         });
         expect(results[0]).to.be.an.instanceof(InboxJamesMailRepositoryEmail);
         expect(results[1]).to.be.an.instanceof(InboxJamesMailRepositoryEmail);
+        expect(results[0].repository).to.equal('mail/repository');
+        expect(results[1].repository).to.equal('mail/repository');
         expect(results[0].sender.name).to.equal('User 1');
         expect(results[1].sender.name).to.equal('User 1');
 

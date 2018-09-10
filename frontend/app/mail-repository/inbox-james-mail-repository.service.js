@@ -36,31 +36,38 @@
     function _getMailDetails(repositoryId, emailKey) {
       return jamesWebadminClient.getMailInMailRepository(repositoryId, emailKey, {
         additionalFields: INBOX_MAIL_REPOSITORY_EMAIL_FIELDS
-      }).then(_populateSender)
+      }).then(_includeRepository)
+        .then(_populateSender)
         .then(function(email) {
           return new InboxJamesMailRepositoryEmail(email);
         });
-    }
 
-    function _populateSender(email) {
-      if (!email.sender) {
-        return $q.when(email);
+      function _includeRepository(email) {
+        email.repository = repositoryId;
+
+        return email;
       }
 
-      return userAPI.getUsersByEmail(email.sender)
-        .then(function(response) {
-          var foundUser = response.data && response.data[0] || {};
+      function _populateSender(email) {
+        if (!email.sender) {
+          return $q.when(email);
+        }
 
-          email.sender = _.assign({}, foundUser, {
-            email: email.sender,
-            name: userUtils.displayNameOf(foundUser) || email.sender
+        return userAPI.getUsersByEmail(email.sender)
+          .then(function(response) {
+            var foundUser = response.data && response.data[0] || {};
+
+            email.sender = _.assign({}, foundUser, {
+              email: email.sender,
+              name: userUtils.displayNameOf(foundUser) || email.sender
+            });
+
+            return email;
+          })
+          .catch(function() {
+            return email;
           });
-
-          return email;
-        })
-        .catch(function() {
-          return email;
-        });
+      }
     }
   }
 })(angular);

@@ -6,7 +6,7 @@
 
   function InboxJamesMailRepositoryEmailFactory(_) {
     function InboxJamesMailRepositoryEmail(email) {
-      _.assign(this, _.pick(email, ['name', 'sender', 'recipients', 'headers', 'lastUpdated', 'htmlBody', 'textBody', 'attributes']));
+      _.assign(this, _.pick(email, ['name', 'sender', 'recipients', 'headers', 'lastUpdated', 'htmlBody', 'textBody', 'attributes', 'repository']));
 
       // For reusing inbox component
       this.to = this.recipients.map(function(recipient) {

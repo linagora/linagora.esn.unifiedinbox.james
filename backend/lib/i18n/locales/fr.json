@@ -27,5 +27,20 @@
   "You are about to remove the rule \"%s\"": "Vous vous apprêtez à retirer la règle \"%s\"",
   "Undo": "Annuler",
   "Rejected": "Rejeté",
-  "Quarantined": "En quarantaine"
+  "Quarantined": "En quarantaine",
+  "Deleting all mails...": "Suppression de tous les emails en cours...",
+  "Deleting mail...": "Suppression de l'email en cours...",
+  "Deleting %s mails...": "Suppression de %s emails en cours...",
+  "All mails deleted": "Tous les emails ont été supprimés",
+  "Mail deleted": "Email supprimé",
+  "%s mails deleted": "%s emails ont été supprimés",
+  "Failed to delete mails": "Échec lors de la suppression des emails",
+  "Failed to delete mail": "Échec lors de la suppression de l'email",
+  "Delete mail?": "Supprimer le mail?",
+  "Delete mails?": "Supprimer les emails?",
+  "Delete all mails?": "Supprimer tous les emails?",
+  "If you choose to delete, this mail will no longer be delivered and will be permanently deleted from James.": "Si vous choisissez de supprimer ce mail, il ne sera jamais remis à ses destinataires et il sera supprimé de manière permanente de James.",
+  "If you choose to delete, these mails will no longer be delivered and will be permanently deleted from James.": "Si vous choisissez de supprimer ces mails, ils ne seront jamais remis à leurs destinataires et seront supprimé de James de manière permanente.",
+  "If you choose to delete, all mails in this repository will no longer be delivered and will be permanently deleted from James.": "Si vous choisissez de supprimer tous les mails contenus dans ce dépôt, ils ne seront jamais remis à leurs destinataires et seront supprimé de James de manière permanente.",
+  "Delete all mails": "Supprimer tous les emails"
 }

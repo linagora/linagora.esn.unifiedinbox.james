@@ -1,4 +1,4 @@
-.modal.full-screen.email-view
+.inbox-james-mail-repository-email-dialog.modal.full-screen.email-view
   .modal-dialog
     .modal-content
       .modal-header
@@ -11,10 +11,14 @@
             esn-avatar(user-email='::$ctrl.email.sender.email')
           .avatarify
             inbox-emailer-display(email='::$ctrl.email')
-
         .email-body
           inbox-message-body(message='::$ctrl.email')
       .modal-footer
-        button.btn.btn-default(type='button', ng-click='$hide()') #{__('Cancel')}
-        button.btn.btn-primary(type='submit', ng-click='$ctrl.download()', title=__('Download (.eml)'))
-          i.mdi.mdi-download
+        .group-left
+          button.btn.btn-link.btn-icon.color-danger(type='button', ng-click='$ctrl.delete(); $hide()')
+            i.mdi.mdi-delete
+
+        .group-right
+          button.btn.btn-default(type='button', ng-click='$hide()') #{__('Cancel')}
+          button.btn.btn-primary(type='submit', ng-click='$ctrl.download()', title=__('Download (.eml)'))
+            i.mdi.mdi-download

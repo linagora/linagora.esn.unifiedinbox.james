@@ -51,3 +51,15 @@ angular.module('ngFileSaver', [])
       saveAs: angular.noop
     };
   });
+angular.module('esn.i18n', [])
+  .factory('esnI18nService', function() {
+    return {
+      translate: function(text) {
+        return text;
+      }
+    };
+  });
+angular.module('mgcrea.ngStrap.modal', [])
+  .factory('$modal', function() {
+    return angular.noop;
+  });

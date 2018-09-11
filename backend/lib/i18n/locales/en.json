@@ -26,5 +26,6 @@
   "No match": "No match",
   "You are about to remove the rule \"%s\"": "You are about to remove the rule \"%s\"",
   "Undo": "Undo",
-  "Rejected": "Rejected"
+  "Rejected": "Rejected",
+  "Quarantined": "Quarantined"
 }

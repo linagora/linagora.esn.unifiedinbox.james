@@ -26,5 +26,6 @@
   "No match": "Không khớp",
   "You are about to remove the rule \"%s\"": "Bạn chuẩn bị xóa luật \"%s\"",
   "Undo": "Hủy",
-  "Rejected": "Từ chối"
+  "Rejected": "Từ chối",
+  "Quarantined": "Bị cách ly"
 }

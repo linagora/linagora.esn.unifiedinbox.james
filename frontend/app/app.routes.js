@@ -4,48 +4,37 @@
   angular.module('linagora.esn.unifiedinbox.james')
 
   .config(function($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.when('/dlp', function($location, session) {
-      session.ready.then(function() {
-        if (!session.userIsDomainAdministrator()) {
-          return $location.path('/');
-        }
-
-        return $location.path('/dlp/quarantine');
-      });
-    });
-
     $stateProvider
-      .state('dlp', {
+      .state('admin.domain.dlp', {
         url: '/dlp',
-        templateUrl: '/linagora.esn.unifiedinbox.james/app/dlp/inbox-james-dlp.html',
-        resolve: {
-          isAdmin: function($location, session) {
-            return session.ready.then(function() {
-              if (!session.userIsDomainAdministrator()) { $location.path('/'); }
-            });
+        deepStateRedirect: {
+          default: 'admin.domain.dlp.quarantine',
+          params: true,
+          fn: function() {
+            return true;
           }
         }
       })
-      .state('dlp.quarantine', {
+      .state('admin.domain.dlp.quarantine', {
         url: '/quarantine',
         views: {
-          'root@dlp': {
+          'root@admin': {
             template: '<inbox-james-dlp-quarantine />'
           }
         }
       })
-      .state('dlp.rejected', {
-        url: '/rejected',
+      .state('admin.domain.dlp.rejected', {
+        url: '/quarantine',
         views: {
-          'root@dlp': {
+          'root@admin': {
             template: '<inbox-james-dlp-rejected />'
           }
         }
       })
-      .state('dlp.settings', {
-        url: '/settings',
+      .state('admin.domain.dlp.settings', {
+        url: '/quarantine',
         views: {
-          'root@dlp': {
+          'root@admin': {
             template: '<inbox-james-dlp-settings />'
           }
         }

@@ -27,5 +27,20 @@
   "You are about to remove the rule \"%s\"": "Bạn chuẩn bị xóa luật \"%s\"",
   "Undo": "Hủy",
   "Rejected": "Từ chối",
-  "Quarantined": "Bị cách ly"
+  "Quarantined": "Bị cách ly",
+  "Deleting all mails...": "Đang xóa tất cả thư...",
+  "Deleting mail...": "Đang xóa thư...",
+  "Deleting %s mails...": "Đang xóa %s thư...",
+  "All mails deleted": "Tất cả thư đã được xóa",
+  "Mail deleted": "Thư đã được xóa",
+  "%s mails deleted": "%s thư đã được xóa",
+  "Failed to delete mails": "Xóa thư thất bại",
+  "Failed to delete mail": "Xóa thư thất bại",
+  "Delete mail?": "Xóa thư?",
+  "Delete mails?": "Xóa thư?",
+  "Delete all mails?": "Xóa tất cả các thư?",
+  "If you choose to delete, this mail will no longer be delivered and will be permanently deleted from James.": "Nếu bạn chọn xóa, thư sẽ không được gửi đi và sẽ được xóa hoàn toàn khỏi James",
+  "If you choose to delete, these mails will no longer be delivered and will be permanently deleted from James.": "Nếu bạn chọn xóa, những thư này sẽ không được gửi đi và sẽ được xóa hoàn toàn khỏi James",
+  "If you choose to delete, all mails in this repository will no longer be delivered and will be permanently deleted from James.": "Nếu bạn chọn xóa, tất cả các thư trong thư mục sẽ không được gửi đi và sẽ được xóa hoàn toàn khỏi James",
+  "Delete all mails": "Xóa tất cả các thư"
 }

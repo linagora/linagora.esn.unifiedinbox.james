@@ -27,5 +27,20 @@
   "You are about to remove the rule \"%s\"": "You are about to remove the rule \"%s\"",
   "Undo": "Undo",
   "Rejected": "Rejected",
-  "Quarantined": "Quarantined"
+  "Quarantined": "Quarantined",
+  "Deleting all mails...": "Deleting all mails...",
+  "Deleting mail...": "Deleting mail...",
+  "Deleting %s mails...": "Deleting %s mails...",
+  "All mails deleted": "All mails deleted",
+  "Mail deleted": "Mail deleted",
+  "%s mails deleted": "%s mails deleted",
+  "Failed to delete mails": "Failed to delete mails",
+  "Failed to delete mail": "Failed to delete mail",
+  "Delete mail?": "Delete mail?",
+  "Delete mails?": "Delete mails?",
+  "Delete all mails?": "Delete all mails?",
+  "If you choose to delete, this mail will no longer be delivered and will be permanently deleted from James.": "If you choose to delete, this mail will no longer be delivered and will be permanently deleted from James.",
+  "If you choose to delete, these mails will no longer be delivered and will be permanently deleted from James.": "If you choose to delete, these mails will no longer be delivered and will be permanently deleted from James.",
+  "If you choose to delete, all mails in this repository will no longer be delivered and will be permanently deleted from James.": "If you choose to delete, all mails in this repository will no longer be delivered and will be permanently deleted from James.",
+  "Delete all mails": "Delete all mails"
 }

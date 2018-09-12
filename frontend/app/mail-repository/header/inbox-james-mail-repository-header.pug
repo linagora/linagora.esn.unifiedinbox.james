@@ -1,10 +1,21 @@
 .inbox-james-mail-repository-header-container
-  .select-all-emails(ng-click='$ctrl.toggleSelectAll()')
-    label.checkbox(ng-click='$event.preventDefault()')
-      input(
-        type='checkbox',
-        ng-model='$ctrl.selectedAllEmails'
-      )
-      i.input-helper
-  .selected-helper(ng-if="$ctrl.isSelecting()")
-    span #{__('%s selected', '{{ $ctrl.getNumberOfSelectedEmails() }}')}
+  .left-block
+    .select-all-emails(ng-click='$ctrl.toggleSelectAll()')
+      label.checkbox(ng-click='$event.preventDefault()')
+        input(
+          type='checkbox',
+          ng-model='$ctrl.selectedAllEmails'
+        )
+        i.input-helper
+    .selected-helper(ng-if="$ctrl.isSelecting()")
+      span #{__('%s selected', '{{ $ctrl.getNumberOfSelectedEmails() }}')}
+
+  .right-block
+    button.btn-link.btn-icon.button(title=__('Delete'), ng-click='$ctrl.deleteSelectedMails()', ng-show='$ctrl.isSelecting()')
+      i.mdi.mdi-delete
+    .dropdown
+      button.btn-link.btn-icon.button(data-toggle='dropdown', aria-expanded='true')
+        i.mdi.mdi-dots-vertical
+      ul.dropdown-menu.dropdown-menu-right
+        li
+          a.clickable(ng-click='$ctrl.deleteAllMails()') #{__('Delete all mails')}

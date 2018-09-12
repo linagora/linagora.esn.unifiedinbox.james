@@ -16,6 +16,8 @@
     'esn.user',
     'esn.session',
     'esn.infinite-list',
+    'esn.i18n',
+    'mgcrea.ngStrap.modal',
     'linagora.esn.james',
     'linagora.esn.unifiedinbox'
   ]);

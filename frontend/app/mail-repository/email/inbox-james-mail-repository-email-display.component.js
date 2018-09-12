@@ -6,7 +6,8 @@
       templateUrl: '/linagora.esn.unifiedinbox.james/app/mail-repository/email/inbox-james-mail-repository-email-display.html',
       bindings: {
         email: '<',
-        download: '&'
+        download: '&',
+        delete: '&'
       }
     });
 })(angular);

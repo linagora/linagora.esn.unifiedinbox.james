@@ -7,19 +7,55 @@
   function inboxJamesMailRepository(
     _,
     $q,
+    $modal,
+    $rootScope,
     InboxJamesMailRepositoryEmail,
     jamesWebadminClient,
     userAPI,
     userUtils,
-    INBOX_MAIL_REPOSITORY_EMAIL_FIELDS
+    INBOX_MAIL_REPOSITORY_EMAIL_FIELDS,
+    INBOX_MAIL_REPOSITORY_EVENTS
   ) {
     return {
+      deleteAllMails: deleteAllMails,
+      deleteMails: deleteMails,
       downloadEmlFile: downloadEmlFile,
-      list: list
+      list: list,
+      openMailsDeletingModal: openMailsDeletingModal
     };
 
     function downloadEmlFile(repositoryId, emailKey) {
       jamesWebadminClient.downloadEmlFileFromMailRepository(repositoryId, emailKey);
+    }
+
+    function deleteMails(emails) {
+      return $q.all(emails.map(function(email) {
+        return jamesWebadminClient.deleteMailInMailRepository(email.repository, email.name);
+      })).then(function() {
+        $rootScope.$broadcast(INBOX_MAIL_REPOSITORY_EVENTS.MAILS_REMOVED, {
+          emails: emails
+        });
+      });
+    }
+
+    function deleteAllMails(repositoryId) {
+      return jamesWebadminClient.deleteAllMailsInMailRepository(repositoryId)
+        .then(function() {
+          $rootScope.$broadcast(INBOX_MAIL_REPOSITORY_EVENTS.ALL_MAILS_REMOVED);
+        });
+    }
+
+    function openMailsDeletingModal(context) {
+      $modal({
+        templateUrl: '/linagora.esn.unifiedinbox.james/app/mail-repository/email/delete/inbox-james-mail-repository-email-delete-dialog.html',
+        backdrop: 'static',
+        placement: 'center',
+        controller: 'inboxJamesMailRepositoryEmailDeleteDialogController',
+        controllerAs: '$ctrl',
+        locals: {
+          context: context
+        }
+      });
     }
 
     function list(repositoryId, options) {

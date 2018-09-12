@@ -5,6 +5,21 @@ inbox-james-mail-repository-header {
     height: 42px;
     padding: 4px 7px;
     background-color: @darkenBgColor;
+
+    .left-block {
+      .flex-start;
+      .flex-grow;
+    }
+
+    .right-block {
+      .flex-end;
+      .flex-grow;
+    }
+
+    i.mdi {
+      color: @secondaryTextColor;
+      font-size: 18px;
+    }
   }
 
   .select-all-emails {
@@ -22,6 +37,8 @@ inbox-james-mail-repository-header {
   }
 
   .selected-helper {
+    .flex-vertical-centered;
+
     margin-left: 10px;
     font-weight: 500;
   }

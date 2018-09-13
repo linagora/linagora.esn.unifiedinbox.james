@@ -54,5 +54,13 @@
   "Emails moved to quarantined repository": "Thư đã di chuyển tới thư mục bị cách ly",
   "Scheduling mails delivery...": "Đang lập lịch gửi thư...",
   "Delivery of mails scheduled": "Đã lập lich gửi thư",
-  "Failed to schedule delivery": "Lập lịch gửi thất bại"
+  "Failed to schedule delivery": "Lập lịch gửi thất bại",
+  "message content": "nội dung thư",
+  "sender": "người gửi",
+  "recipients": "người nhận",
+  "Matched rule": "Quy tắc đối sánh",
+  "Rule description:": "Mô tả quy tắc:",
+  "Source:": "Nguồn:",
+  "Matched string:": "Chuỗi đối sánh:",
+  "Unable to get the rule. The matched rule of this mail might have been dropped earlier.": "Không thể tải chi tiết của quy tắc đối sánh. Quy tắc đối sánh có thể đã được bỏ."
 }

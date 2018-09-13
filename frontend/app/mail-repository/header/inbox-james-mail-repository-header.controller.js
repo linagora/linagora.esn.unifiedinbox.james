@@ -6,39 +6,41 @@
 
   function inboxJamesMailRepositoryHeaderController(
     $scope,
-    $modal,
     inboxJamesMailRepository,
     inboxJamesMailRepositoryEmailSelection,
-    INBOX_MAIL_REPOSITORY_EVENTS,
-    INBOX_MAIL_REPOSITORY_MAIL_DELETION_TARGET
+    INBOX_JAMES_MAIL_REPOSITORY_MAIL_DELETION_TARGET
   ) {
     var self = this;
 
-    self.toggleSelectAll = toggleSelectAll;
+    self.onSelectAllCheckboxClick = onSelectAllCheckboxClick;
     self.getNumberOfSelectedEmails = getNumberOfSelectedEmails;
     self.isSelecting = isSelecting;
-    self.deleteSelectedMails = deleteSelectedMails;
-    self.deleteAllMails = deleteAllMails;
+    self.onDeleteBtnClick = onDeleteBtnClick;
+    self.onBulkActionChange = onBulkActionChange;
     self.$onInit = $onInit;
 
     function $onInit() {
       $scope.$watch(function() {
-        return self.emails.length && self.emails.length === inboxJamesMailRepositoryEmailSelection.getSelected().length;
+        return self.emails.length === inboxJamesMailRepositoryEmailSelection.getSelected().length;
       }, function(selectedAllEmails) {
+        if (!selectedAllEmails && self.selectedAllEmails && self.bulkAction) {
+          self.bulkAction = false;
+        }
+
         self.selectedAllEmails = !!selectedAllEmails;
       });
     }
 
-    function toggleSelectAll() {
-      if (self.selectedAllEmails) {
-        self.selectedAllEmails = false;
-        inboxJamesMailRepositoryEmailSelection.unSelectAll();
-      } else {
-        self.selectedAllEmails = true;
-        self.emails.forEach(function(email) {
-          inboxJamesMailRepositoryEmailSelection.toggleSelection(email, true);
-        });
-      }
+    function onSelectAllCheckboxClick() {
+      self.bulkAction = false;
+
+      _toggleSelectAll(self.selectedAllEmails);
+    }
+
+    function onBulkActionChange() {
+      self.selectedAllEmails = self.bulkAction;
+
+      _toggleSelectAll(self.bulkAction);
     }
 
     function getNumberOfSelectedEmails() {
@@ -49,18 +51,30 @@
       return inboxJamesMailRepositoryEmailSelection.isSelecting();
     }
 
-    function deleteSelectedMails() {
-      inboxJamesMailRepository.openMailsDeletingModal({
-        target: INBOX_MAIL_REPOSITORY_MAIL_DELETION_TARGET.MULTIPLE,
+    function onDeleteBtnClick() {
+      var context = {
+        target: INBOX_JAMES_MAIL_REPOSITORY_MAIL_DELETION_TARGET.MULTIPLE,
         data: inboxJamesMailRepositoryEmailSelection.getSelected()
-      });
+      };
+
+      if (self.bulkAction) {
+        context = {
+          target: INBOX_JAMES_MAIL_REPOSITORY_MAIL_DELETION_TARGET.ALL,
+          data: self.repository
+        };
+      }
+
+      inboxJamesMailRepository.openMailsDeletingModal(context);
     }
 
-    function deleteAllMails() {
-      inboxJamesMailRepository.openMailsDeletingModal({
-        target: INBOX_MAIL_REPOSITORY_MAIL_DELETION_TARGET.ALL,
-        data: self.repository
-      });
+    function _toggleSelectAll(isSelectAll) {
+      if (!isSelectAll) {
+        inboxJamesMailRepositoryEmailSelection.unSelectAll();
+      } else {
+        self.emails.forEach(function(email) {
+          inboxJamesMailRepositoryEmailSelection.toggleSelection(email, true);
+        });
+      }
     }
   }
 })(angular);

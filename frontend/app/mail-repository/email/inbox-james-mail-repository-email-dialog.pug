@@ -6,7 +6,7 @@
           span(aria-hidden='true') &times;
         h4.modal-title.ellipsis(title='{{::$ctrl.email.headers.Subject[0]}}') {{::$ctrl.email.headers.Subject[0]}}
       .modal-body
-        .email-header(ng-click='ctrl.toggleIsCollapsed(email)', ng-class='{"clickable": email.isCollapsed !== undefined}')
+        .email-header
           .sender-avatar.hidden-xs
             esn-avatar(user-email='::$ctrl.email.sender.email')
           .avatarify

@@ -54,5 +54,13 @@
   "Emails moved to quarantined repository": "Emails déplacé vers le dépôt de  quarantaine",
   "Scheduling mails delivery...": "Planification de  la livraison...",
   "Delivery of mails scheduled": "Livraison des emails plannifiée",
-  "Failed to schedule delivery": "Échec lors de la plannification de la livraison"
+  "Failed to schedule delivery": "Échec lors de la plannification de la livraison",
+  "message content": "contenu du message",
+  "sender": "expéditeur",
+  "recipients": "destinataires",
+  "Matched rule": "Règle correspondante",
+  "Rule description:": "Description de la règle:",
+  "Source:": "Source:",
+  "Matched string:": "Chaîne de caractères correspondante:",
+  "Unable to get the rule. The matched rule of this mail might have been dropped earlier.": "Impossible de trouver la règle. La règle correspondante a été supprimé précédemment."
 }

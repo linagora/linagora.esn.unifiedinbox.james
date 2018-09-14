@@ -6,13 +6,14 @@
           span(aria-hidden='true') &times;
         h4.modal-title.ellipsis(title='{{::$ctrl.email.headers.Subject[0]}}') {{::$ctrl.email.headers.Subject[0]}}
       .modal-body
-        .email-header(ng-click='ctrl.toggleIsCollapsed(email)', ng-class='{"clickable": email.isCollapsed !== undefined}')
+        .email-header
           .sender-avatar.hidden-xs
             esn-avatar(user-email='::$ctrl.email.sender.email')
           .avatarify
             inbox-emailer-display(email='::$ctrl.email')
         .all-centered
           .flex-vertical-centered(dynamic-directive="email-extra-actions")
+        .extra-info(dynamic-directive='mail-repository-mail-extra-info')
         .email-body
           inbox-message-body(message='::$ctrl.email')
       .modal-footer

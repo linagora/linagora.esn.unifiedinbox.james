@@ -24,7 +24,7 @@
         }
       })
       .state('admin.domain.dlp.rejected', {
-        url: '/quarantine',
+        url: '/rejected',
         views: {
           'root@admin': {
             template: '<inbox-james-dlp-rejected />'
@@ -32,7 +32,7 @@
         }
       })
       .state('admin.domain.dlp.settings', {
-        url: '/quarantine',
+        url: '/settings',
         views: {
           'root@admin': {
             template: '<inbox-james-dlp-settings />'

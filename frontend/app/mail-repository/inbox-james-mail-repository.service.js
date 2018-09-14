@@ -13,8 +13,8 @@
     jamesWebadminClient,
     userAPI,
     userUtils,
-    INBOX_MAIL_REPOSITORY_EMAIL_FIELDS,
-    INBOX_MAIL_REPOSITORY_EVENTS
+    INBOX_JAMES_MAIL_REPOSITORY_EMAIL_FIELDS,
+    INBOX_JAMES_MAIL_REPOSITORY_EVENTS
   ) {
     return {
       deleteAllMails: deleteAllMails,
@@ -32,7 +32,7 @@
       return $q.all(emails.map(function(email) {
         return jamesWebadminClient.deleteMailInMailRepository(email.repository, email.name);
       })).then(function() {
-        $rootScope.$broadcast(INBOX_MAIL_REPOSITORY_EVENTS.MAILS_REMOVED, {
+        $rootScope.$broadcast(INBOX_JAMES_MAIL_REPOSITORY_EVENTS.MAILS_REMOVED, {
           emails: emails
         });
       });
@@ -41,7 +41,7 @@
     function deleteAllMails(repositoryId) {
       return jamesWebadminClient.deleteAllMailsInMailRepository(repositoryId)
         .then(function() {
-          $rootScope.$broadcast(INBOX_MAIL_REPOSITORY_EVENTS.ALL_MAILS_REMOVED);
+          $rootScope.$broadcast(INBOX_JAMES_MAIL_REPOSITORY_EVENTS.ALL_MAILS_REMOVED);
         });
     }
 
@@ -71,7 +71,7 @@
 
     function _getMailDetails(repositoryId, emailKey) {
       return jamesWebadminClient.getMailInMailRepository(repositoryId, emailKey, {
-        additionalFields: INBOX_MAIL_REPOSITORY_EMAIL_FIELDS
+        additionalFields: INBOX_JAMES_MAIL_REPOSITORY_EMAIL_FIELDS
       }).then(_includeRepository)
         .then(_populateSender)
         .then(function(email) {

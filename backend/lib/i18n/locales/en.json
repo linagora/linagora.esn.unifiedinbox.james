@@ -42,5 +42,17 @@
   "If you choose to delete, this mail will no longer be delivered and will be permanently deleted from James.": "If you choose to delete, this mail will no longer be delivered and will be permanently deleted from James.",
   "If you choose to delete, these mails will no longer be delivered and will be permanently deleted from James.": "If you choose to delete, these mails will no longer be delivered and will be permanently deleted from James.",
   "If you choose to delete, all mails in this repository will no longer be delivered and will be permanently deleted from James.": "If you choose to delete, all mails in this repository will no longer be delivered and will be permanently deleted from James.",
-  "Delete all mails": "Delete all mails"
+  "Delete all mails": "Delete all mails",
+  "Deny": "Deny",
+  "Allow": "Allow",
+  "Close": "Close",
+  "All mails in the current repository are selected.": "All mails in the current repository are selected.",
+  "Bulk action": "Bulk action",
+  "Moving mails...": "Moving mails...",
+  "Failed to move mails": "Failed to move mails",
+  "Emails moved to rejected repository": "Emails moved to rejected repository",
+  "Emails moved to quarantined repository": "Emails moved to quarantined repository",
+  "Scheduling mails delivery...": "Scheduling mails delivery...",
+  "Delivery of mails scheduled": "Delivery of mails scheduled",
+  "Failed to schedule delivery": "Failed to schedule delivery"
 }

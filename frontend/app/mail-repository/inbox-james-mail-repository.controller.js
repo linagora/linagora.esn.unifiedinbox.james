@@ -10,8 +10,8 @@
     infiniteScrollHelper,
     inboxJamesMailRepository,
     inboxJamesMailRepositoryEmailSelection,
-    INBOX_MAIL_REPOSITORY_EVENTS,
-    INBOX_MAIL_REPOSITORY_MAIL_DELETION_TARGET
+    INBOX_JAMES_MAIL_REPOSITORY_EVENTS,
+    INBOX_JAMES_MAIL_REPOSITORY_MAIL_DELETION_TARGET
   ) {
     var self = this;
     var options = {
@@ -27,8 +27,8 @@
     function $onInit() {
       self.loadMoreElements = infiniteScrollHelper(self, _loadNextItems);
 
-      $scope.$on(INBOX_MAIL_REPOSITORY_EVENTS.MAILS_REMOVED, _removeMailsFromList);
-      $scope.$on(INBOX_MAIL_REPOSITORY_EVENTS.ALL_MAILS_REMOVED, _removeAllMailsFromList);
+      $scope.$on(INBOX_JAMES_MAIL_REPOSITORY_EVENTS.MAILS_REMOVED, _removeMailsFromList);
+      $scope.$on(INBOX_JAMES_MAIL_REPOSITORY_EVENTS.ALL_MAILS_REMOVED, _removeAllMailsFromList);
     }
 
     function $onDestroy() {
@@ -41,7 +41,7 @@
 
     function deleteMail(email) {
       inboxJamesMailRepository.openMailsDeletingModal({
-        target: INBOX_MAIL_REPOSITORY_MAIL_DELETION_TARGET.SINGLE,
+        target: INBOX_JAMES_MAIL_REPOSITORY_MAIL_DELETION_TARGET.SINGLE,
         data: email
       });
     }

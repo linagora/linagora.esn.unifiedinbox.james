@@ -14,7 +14,10 @@ angular.module('pascalprecht.translate', [])
   });
 angular.module('esn.session', [])
   .factory('session', function() {
-    return {};
+    return {
+      ready: $q.when(),
+      domain: {}
+    };
   });
 angular.module('esn.configuration', [])
   .factory('esnConfig', function() {

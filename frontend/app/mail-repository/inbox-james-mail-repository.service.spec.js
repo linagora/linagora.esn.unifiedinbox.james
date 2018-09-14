@@ -9,7 +9,7 @@ describe('The inboxJamesMailRepository service', function() {
   var $rootScope, $q;
   var inboxJamesMailRepository, InboxJamesMailRepositoryEmail, jamesWebadminClient;
   var userAPI, userUtils;
-  var INBOX_MAIL_REPOSITORY_EMAIL_FIELDS, INBOX_MAIL_REPOSITORY_EVENTS;
+  var INBOX_JAMES_MAIL_REPOSITORY_EMAIL_FIELDS, INBOX_JAMES_MAIL_REPOSITORY_EVENTS;
 
   beforeEach(module('linagora.esn.unifiedinbox.james'));
 
@@ -21,8 +21,8 @@ describe('The inboxJamesMailRepository service', function() {
     _jamesWebadminClient_,
     _userAPI_,
     _userUtils_,
-    _INBOX_MAIL_REPOSITORY_EMAIL_FIELDS_,
-    _INBOX_MAIL_REPOSITORY_EVENTS_
+    _INBOX_JAMES_MAIL_REPOSITORY_EMAIL_FIELDS_,
+    _INBOX_JAMES_MAIL_REPOSITORY_EVENTS_
   ) {
     $rootScope = _$rootScope_;
     $q = _$q_;
@@ -31,8 +31,8 @@ describe('The inboxJamesMailRepository service', function() {
     jamesWebadminClient = _jamesWebadminClient_;
     userAPI = _userAPI_;
     userUtils = _userUtils_;
-    INBOX_MAIL_REPOSITORY_EMAIL_FIELDS = _INBOX_MAIL_REPOSITORY_EMAIL_FIELDS_;
-    INBOX_MAIL_REPOSITORY_EVENTS = _INBOX_MAIL_REPOSITORY_EVENTS_;
+    INBOX_JAMES_MAIL_REPOSITORY_EMAIL_FIELDS = _INBOX_JAMES_MAIL_REPOSITORY_EMAIL_FIELDS_;
+    INBOX_JAMES_MAIL_REPOSITORY_EVENTS = _INBOX_JAMES_MAIL_REPOSITORY_EVENTS_;
 
     userAPI.getUsersByEmail = function() {
       return $q.when([{
@@ -60,10 +60,10 @@ describe('The inboxJamesMailRepository service', function() {
         expect(jamesWebadminClient.listMailsInMailRepository).to.have.been.calledWith('mail/repository');
         expect(jamesWebadminClient.getMailInMailRepository).to.have.been.calledTwice;
         expect(jamesWebadminClient.getMailInMailRepository).to.have.been.calledWith('mail/repository', emailKeys[0], {
-          additionalFields: INBOX_MAIL_REPOSITORY_EMAIL_FIELDS
+          additionalFields: INBOX_JAMES_MAIL_REPOSITORY_EMAIL_FIELDS
         });
         expect(jamesWebadminClient.getMailInMailRepository).to.have.been.calledWith('mail/repository', emailKeys[1], {
-          additionalFields: INBOX_MAIL_REPOSITORY_EMAIL_FIELDS
+          additionalFields: INBOX_JAMES_MAIL_REPOSITORY_EMAIL_FIELDS
         });
         expect(results[0]).to.be.an.instanceof(InboxJamesMailRepositoryEmail);
         expect(results[1]).to.be.an.instanceof(InboxJamesMailRepositoryEmail);
@@ -119,7 +119,7 @@ describe('The inboxJamesMailRepository service', function() {
 
       $rootScope.$digest();
 
-      expect($rootScope.$broadcast).to.have.been.calledWith(INBOX_MAIL_REPOSITORY_EVENTS.MAILS_REMOVED, { emails: emails });
+      expect($rootScope.$broadcast).to.have.been.calledWith(INBOX_JAMES_MAIL_REPOSITORY_EVENTS.MAILS_REMOVED, { emails: emails });
      });
   });
 
@@ -141,7 +141,7 @@ describe('The inboxJamesMailRepository service', function() {
 
       $rootScope.$digest();
 
-      expect($rootScope.$broadcast).to.have.been.calledWith(INBOX_MAIL_REPOSITORY_EVENTS.ALL_MAILS_REMOVED);
+      expect($rootScope.$broadcast).to.have.been.calledWith(INBOX_JAMES_MAIL_REPOSITORY_EVENTS.ALL_MAILS_REMOVED);
      });
   });
 });

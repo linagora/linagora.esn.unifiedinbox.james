@@ -9,23 +9,8 @@
     ng-form(role="form", aria-hidden="true", name="form", esn-autocomplete-off)
       .row
         .col-xs-12.col-md-6
-          esn-form-group(
-            label=__('Expression'),
-            validator="$ctrl.validateExpression",
-            validator-error-message=__('Invalid expression')
-          )
+          esn-form-group(label=__('Expression'))
             input.form-control(type="text", ng-model="$ctrl.rule.expression", required, name="expression")
-          .test-expression-btn
-            a(href='', ng-if="!$ctrl.showTestExpressionField", ng-click="$ctrl.onTestExpressionBtnClick()")
-              | #{__('Test expression')}
-          .flex(ng-if="$ctrl.showTestExpressionField")
-            esn-form-group.flex-grow(label=__('Enter sample data'))
-              input.form-control(type="text", ng-model='$ctrl.sampleData', name="test")
-            .flex-grow
-              span.match-message(
-                ng-if="form.$valid"
-                ng-class="{match: $ctrl.isSampleDataMatchExpression()}"
-              ) {{$ctrl.isSampleDataMatchExpression() ? 'Match' : 'No match' | esnI18n}}
         .col-xs-12.col-md-6
           esn-form-group(label=__('Description'))
             input.form-control(type="text", ng-model='$ctrl.rule.explanation', required, name="explanation")

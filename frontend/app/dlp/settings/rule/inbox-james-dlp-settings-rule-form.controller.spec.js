@@ -29,34 +29,6 @@ describe('The InboxJamesDlpSettingsRuleFormController', function() {
     return controller;
   }
 
-  describe('The isSampleDataMatchExpression function', function() {
-    it('should return false if there is no sample data', function() {
-      var controller = initController();
-
-      controller.rule.expression = '123';
-
-      expect(controller.isSampleDataMatchExpression()).to.be.false;
-    });
-
-    it('should return false if sample data does not match expression', function() {
-      var controller = initController();
-
-      controller.sampleData = 'not-match';
-      controller.rule.expression = '123';
-
-      expect(controller.isSampleDataMatchExpression()).to.be.false;
-    });
-
-    it('should return true if sample data matches expression', function() {
-      var controller = initController();
-
-      controller.sampleData = 'match expression';
-      controller.rule.expression = 'match';
-
-      expect(controller.isSampleDataMatchExpression()).to.be.true;
-    });
-  });
-
   describe('The onDeleteBtnClick function', function() {
     it('should set #rule.deleted to true', function() {
       var form = {
@@ -78,36 +50,6 @@ describe('The InboxJamesDlpSettingsRuleFormController', function() {
       controller.onUndoBtnClick();
 
       expect(controller.rule.deleted).to.be.false;
-    });
-  });
-
-  describe('The onTestExpressionBtnClick function', function() {
-    it('should set showTestExpressionField to true', function() {
-      var controller = initController();
-
-      controller.onTestExpressionBtnClick();
-
-      expect(controller.showTestExpressionField).to.be.true;
-    });
-  });
-
-  describe('The validateExpression function', function() {
-    it('should return false if there is no expression', function() {
-      var controller = initController();
-
-      expect(controller.validateExpression()).to.be.false;
-    });
-
-    it('should return false if there is an invalid expression', function() {
-      var controller = initController();
-
-      expect(controller.validateExpression('\\')).to.be.false;
-    });
-
-    it('should return true if there is a valid expression', function() {
-      var controller = initController();
-
-      expect(controller.validateExpression('valid')).to.be.true;
     });
   });
 });

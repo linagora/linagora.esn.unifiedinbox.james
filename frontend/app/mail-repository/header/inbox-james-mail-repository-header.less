@@ -6,7 +6,7 @@ inbox-james-mail-repository-header {
   padding: 4px 7px;
   background-color: @darkenBgColor;
 
-  .select-all-emails {
+  .select-all-checkbox {
     .all-centered;
 
     width: 40px;
@@ -27,6 +27,14 @@ inbox-james-mail-repository-header {
     font-weight: 500;
   }
 
+  .select-menu-caret {
+    .clickable;
+    .all-centered;
+
+    margin-left: 5px;
+    height: 100%;
+  }
+
   i.mdi {
     color: @secondaryTextColor;
     font-size: 18px;
@@ -35,7 +43,7 @@ inbox-james-mail-repository-header {
 
 @media (min-width: @screen-xl-min) {
   inbox-james-mail-repository-header {
-    .select-all-emails {
+    .select-all-checkbox {
       width: 28px;
       height: 28px;
     }

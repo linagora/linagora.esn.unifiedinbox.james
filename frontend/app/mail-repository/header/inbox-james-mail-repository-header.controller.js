@@ -12,35 +12,40 @@
   ) {
     var self = this;
 
-    self.onSelectAllCheckboxClick = onSelectAllCheckboxClick;
+    self.$onInit = $onInit;
     self.getNumberOfSelectedEmails = getNumberOfSelectedEmails;
     self.isSelecting = isSelecting;
     self.onDeleteBtnClick = onDeleteBtnClick;
-    self.onBulkActionChange = onBulkActionChange;
-    self.$onInit = $onInit;
+    self.selectAllMails = selectAllMails;
+    self.selectRepository = selectRepository;
 
     function $onInit() {
       $scope.$watch(function() {
         return self.emails.length === inboxJamesMailRepositoryEmailSelection.getSelected().length;
       }, function(selectedAllEmails) {
-        if (!selectedAllEmails && self.selectedAllEmails && self.bulkAction) {
-          self.bulkAction = false;
+        if (!selectedAllEmails && self.selectedAllEmails && self.repositorySelected) {
+          self.repositorySelected = false;
         }
 
         self.selectedAllEmails = !!selectedAllEmails;
       });
     }
 
-    function onSelectAllCheckboxClick() {
-      self.bulkAction = false;
+    function selectAllMails(selection) {
+      self.repositorySelected = false;
+
+      if (selection) {
+        self.selectedAllEmails = selection;
+      }
 
       _toggleSelectAll(self.selectedAllEmails);
     }
 
-    function onBulkActionChange() {
-      self.selectedAllEmails = self.bulkAction;
+    function selectRepository() {
+      self.repositorySelected = true;
+      self.selectedAllEmails = true;
 
-      _toggleSelectAll(self.bulkAction);
+      _toggleSelectAll(self.repositorySelected);
     }
 
     function getNumberOfSelectedEmails() {
@@ -57,7 +62,7 @@
         data: inboxJamesMailRepositoryEmailSelection.getSelected()
       };
 
-      if (self.bulkAction) {
+      if (self.repositorySelected) {
         context = {
           target: INBOX_JAMES_MAIL_REPOSITORY_MAIL_DELETION_TARGET.ALL,
           data: self.repository

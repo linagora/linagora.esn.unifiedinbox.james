@@ -1,11 +1,8 @@
-'use strict';
+module.exports = dependencies => {
 
-// arguments: dependencies
-module.exports = function() {
-
-  // const model = require('./YOUR_MODEL')(dependencies);
+  const UnifiedInboxRestoringMessagesRequests = require('./restoring-messages-requests')(dependencies);
 
   return {
-    // model
+    UnifiedInboxRestoringMessagesRequests
   };
 };

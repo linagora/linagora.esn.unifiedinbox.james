@@ -59,5 +59,7 @@
   "Matched string:": "Chuỗi đối sánh:",
   "Unable to get the rule. The matched rule of this mail might have been dropped earlier.": "Không thể tải chi tiết của quy tắc đối sánh. Quy tắc đối sánh có thể đã được bỏ.",
   "Select all mails in repository": "Chọn tất cả thư trong thư mục",
-  "Select all mails": "Chọn tất cả thư"
+  "Select all mails": "Chọn tất cả thư",
+  "Recover deleted messages": "Khôi phục thư đã bị xóa",
+  "Recover": "Khôi phục"
 }

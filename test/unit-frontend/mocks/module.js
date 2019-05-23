@@ -21,7 +21,9 @@ angular.module('esn.session', [])
   });
 angular.module('esn.configuration', [])
   .factory('esnConfig', function() {
-    return {};
+    return function() {
+      return $q.when({});
+    };
   });
 angular.module('linagora.esn.james', [])
   .factory('jamesWebadminClient', function() {

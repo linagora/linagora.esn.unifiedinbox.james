@@ -59,5 +59,7 @@
   "Matched string:": "Matched string:",
   "Unable to get the rule. The matched rule of this mail might have been dropped earlier.": "Unable to get the rule. The matched rule of this mail might have been dropped earlier.",
   "Select all mails in repository": "Select all mails in repository",
-  "Select all mails": "Select all mails"
+  "Select all mails": "Select all mails",
+  "Recover deleted messages": "Recover deleted messages",
+  "Recover": "Recover"
 }

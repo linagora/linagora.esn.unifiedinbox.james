@@ -1,13 +1,13 @@
 module.exports = {
   RESTORING_MESSAGES_REQUEST: {
     STATUSES: {
-      PENDING: 'pending',
-      REJECTED: 'rejected',
-      SUCCESS: 'success',
-      FAILED: 'failed'
+      APPROVED: 'approved'
     },
     COMBINATORS: {
       AND: 'and'
     }
+  },
+  EVENTS: {
+    RESTORING_REQUEST_APPROVED: 'unifiedinbox-james:restoring-deleted-messages-request:approved'
   }
 };

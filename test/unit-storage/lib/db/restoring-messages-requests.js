@@ -1,23 +1,25 @@
 const chai = require('chai');
 const expect = chai.expect;
 
-describe('The UnifiedInboxRestoringMessagesRequests model', function() {
-  let UnifiedInboxRestoringMessagesRequests, ObjectId, mongoose;
+describe('The UnifiedInboxRestoringDeletedMessagesRequests model', function() {
+  let UnifiedInboxRestoringDeletedMessagesRequests, ObjectId, mongoose, pubsub;
   let RESTORING_MESSAGES_REQUEST;
 
   beforeEach(function(done) {
     mongoose = this.moduleHelpers.dependencies('db').mongo.mongoose;
+
     ObjectId = mongoose.Types.ObjectId;
 
     RESTORING_MESSAGES_REQUEST = require(`${this.testEnv.backendPath}/lib/constants`).RESTORING_MESSAGES_REQUEST;
 
-    UnifiedInboxRestoringMessagesRequests = mongoose.model('UnifiedInboxRestoringMessagesRequests');
+    require(`${this.testEnv.backendPath}/lib/db`)(this.moduleHelpers.dependencies);
+    UnifiedInboxRestoringDeletedMessagesRequests = mongoose.model('UnifiedInboxRestoringDeletedMessagesRequests');
 
     this.connectMongoose(mongoose, done);
   });
 
   afterEach(function(done) {
-    delete mongoose.connection.models.UnifiedInboxRestoringMessagesRequests;
+    delete mongoose.connection.models.UnifiedInboxRestoringDeletedMessagesRequests;
     this.helpers.mongo.dropDatabase(err => {
       if (err) return done(err);
       this.testEnv.core.db.mongo.mongoose.connection.close(done);
@@ -25,7 +27,7 @@ describe('The UnifiedInboxRestoringMessagesRequests model', function() {
   });
 
   function saveRestoringMessagesRequest(restoringMessagesRequestJson, callback) {
-    const restoringMessagesRequest = new UnifiedInboxRestoringMessagesRequests(restoringMessagesRequestJson);
+    const restoringMessagesRequest = new UnifiedInboxRestoringDeletedMessagesRequests(restoringMessagesRequestJson);
 
     return restoringMessagesRequest.save(callback);
   }

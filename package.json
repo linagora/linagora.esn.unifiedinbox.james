@@ -1,6 +1,6 @@
 {
   "name": "linagora.esn.unifiedinbox.james",
-  "version": "1.4.8-dev",
+  "version": "1.4.8",
   "description": "Unifiedinbox James plugin",
   "main": "index.js",
   "devDependencies": {

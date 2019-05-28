@@ -61,5 +61,17 @@
   "Select all mails in repository": "Select all mails in repository",
   "Select all mails": "Select all mails",
   "Recover deleted messages": "Recover deleted messages",
-  "Recover": "Recover"
+  "Recover": "Recover",
+  "Add a new criterion": "Add a new criterion",
+  "There is no criterion, all deleted messages will be recovered.": "There is no criterion, all deleted messages will be recovered.",
+  "Or you can recover certain deleted messages with criteria. Click %s to add a new criterion.": "Or you can recover certain deleted messages with criteria. Click %s to add a new criterion.",
+  "The messages which are matched with all criteria": "The messages which are matched with all criteria",
+  "Subject": "Subject",
+  "Subject containing": "Subject containing",
+  "Subject containing (ignore case)": "Subject containing (ignore case)",
+  "Subject equals": "Subject equals",
+  "Subject equals (ignore case)": "Subject equals (ignore case)",
+  "Submitting request...": "Submitting request...",
+  "Request submitted": "Request submitted",
+  "Failed to submit request": "Failed to submit request"
 }

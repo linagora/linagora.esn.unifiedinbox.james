@@ -61,5 +61,17 @@
   "Select all mails in repository": "Chọn tất cả thư trong thư mục",
   "Select all mails": "Chọn tất cả thư",
   "Recover deleted messages": "Khôi phục thư đã bị xóa",
-  "Recover": "Khôi phục"
+  "Recover": "Khôi phục",
+  "Add a new criterion": "Thêm tiêu chí",
+  "There is no criterion, all deleted messages will be recovered.": "Không có tiêu chí nào, tất cả thư đã xóa sẽ được khôi phục",
+  "Or you can recover certain deleted messages with criteria. Click %s to add a new criterion.": "Hoặc bạn có thể khôi phục một số thư đã xóa với các tiêu chí. Bấm %s để thêm tiêu chí",
+  "The messages which are matched with all criteria": "The messages which are matched with all criteria",
+  "Subject": "Chủ đề",
+  "Subject containing": "Chủ đề chứa",
+  "Subject containing (ignore case)": "Chủ đề chứa (không phân biệt chữ viết hoa)",
+  "Subject equals": "Chủ đề là",
+  "Subject equals (ignore case)": "Chủ đề là (không phân biệt chữ viết hoa)",
+  "Submitting request...": "Đang gửi yêu cầu...",
+  "Request submitted": "Đã gửi yêu cầu",
+  "Failed to submit request": "Gửi yêu cầu thất bại"
 }

@@ -61,5 +61,17 @@
   "Select all mails in repository": "Sélectionner tous les emails du dépôt",
   "Select all mails": "Sélectionner tous les emails",
   "Recover deleted messages": "Restaurer les messages effacés",
-  "Recover": "Récupérer"
+  "Recover": "Récupérer",
+  "Add a new criterion": "Ajouter un nouveau critère",
+  "There is no criterion, all deleted messages will be recovered.": "Il n'y a pas de critères, tous les messages supprimés vont être restaurés",
+  "Or you can recover certain deleted messages with criteria. Click %s to add a new criterion.": "Ou vous pouvez restaurer certains messages supprimés avec des critères. Cliquez %s pour ajouter un nouveau critère",
+  "The messages which are matched with all criteria": "Les messages qui correspondent à tous les critères",
+  "Subject": "Sujet",
+  "Subject containing": "Sujet contenant",
+  "Subject containing (ignore case)": "Sujet contenant (ignorer la casse)",
+  "Subject equals": "Sujet égal à",
+  "Subject equals (ignore case)": "Sujet égal à (ignorer la casse)",
+  "Submitting request...": "Soumettre la requête...",
+  "Request submitted": "La requête est soumise",
+  "Failed to submit request": "Impossible de soumettre la requête"
 }

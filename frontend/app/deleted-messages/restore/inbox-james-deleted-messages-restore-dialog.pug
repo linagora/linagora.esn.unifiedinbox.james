@@ -1,10 +1,14 @@
-.modal
+.modal.full-screen.no-padding-xs.inbox-james-deleted-messages-restore-dialog
   .modal-dialog
     .modal-content
-      .modal-header
-        h4.modal-title #{__('Recover deleted messages')}
-      .modal-body
-        span Recover deleted messages form body
-      .modal-footer
-        button.btn.btn-link(type="button", ng-click="$hide()") #{__('Cancel')}
-        button.btn.btn-primary(type="button", ng-click="$ctrl.onRecoverBtnClick(); $hide()") #{__('Recover')}
+      form(name="form")
+        .modal-header
+          h4.modal-title #{__('Recover deleted messages')}
+        .modal-body
+          inbox-james-deleted-messages-criteria(criteria="$ctrl.criteria")
+        .modal-footer
+          button.btn.btn-link(type="button", ng-click="$ctrl.onCancelBtnClick(); $hide()") #{__('Cancel')}
+          button.btn.btn-primary(
+            type="submit",
+            ng-click="$ctrl.onRecoverBtnClick(); $hide()"
+          ) #{__('Recover')}

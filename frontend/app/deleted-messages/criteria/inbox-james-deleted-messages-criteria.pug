@@ -1,0 +1,17 @@
+.content
+  .empty-message(ng-if="$ctrl.criteria.length === 0")
+    p #{__('There is no criterion, all deleted messages will be recovered.')}
+    p !{__('Or you can recover certain deleted messages with criteria. Click %s to add a new criterion.', '<i class="mdi mdi-plus-circle"></i>')}
+  ng-form(name="form", ng-if="$ctrl.criteria.length > 0")
+    h5 #{__('The messages which are matched with all criteria')}:
+    div
+      .flex.flex-vertical-centered.m-t-20(ng-repeat="criterion in $ctrl.criteria track by $index")
+        inbox-james-deleted-messages-criteria-item.flex-grow(
+          criterion="criterion",
+          available-criteria="$ctrl.availableCriteria"
+        )
+        .flex-end
+          a.clickable.mdi.mdi-minus-circle-outline(ng-click="$ctrl.onRemoveBtnClick($index)")
+a.adding-criterion-button(href="", ng-click="$ctrl.onAddBtnClick()")
+  i.mdi.mdi-plus-circle.m-r-10
+  | #{__('Add a new criterion')}

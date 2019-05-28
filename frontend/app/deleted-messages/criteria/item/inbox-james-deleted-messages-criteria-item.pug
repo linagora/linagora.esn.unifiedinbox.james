@@ -1,0 +1,21 @@
+ng-form(name="form")
+  .col-xs-12
+    .row
+      .col-md-5.col-xs-12
+        md-input-container
+          md-select(
+            ng-model="$ctrl.criterion.operator",
+            md-container-class="inbox-james-deleted-messages-select-dropdown",
+            aria-label="select criterion"
+          )
+            md-option(
+              ng-repeat="criterion in $ctrl.availableCriteria"
+              ng-value="criterion.operator"
+            ) {{::criterion.label | esnI18n}}
+      .col-md-7.col-xs-12(ng-switch="$ctrl.criterion.fieldName")
+        input.form-control.criterion-value(
+          type="text"
+          ng-switch-when="subject"
+          placeholder=__('Subject')
+          required
+        )

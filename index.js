@@ -3,8 +3,8 @@ const Dependency = AwesomeModule.AwesomeModuleDependency;
 const path = require('path');
 const glob = require('glob-all');
 const FRONTEND_JS_PATH = __dirname + '/frontend/app/';
-const MODULE_NAME = 'unifiedinbox.james';
-const AWESOME_MODULE_NAME = `linagora.esn.${MODULE_NAME}`;
+const NAMESPACE = 'unifiedinbox.james';
+const AWESOME_MODULE_NAME = `linagora.esn.${NAMESPACE}`;
 
 const awesomeModule = new AwesomeModule(AWESOME_MODULE_NAME, {
   dependencies: [
@@ -49,12 +49,12 @@ const awesomeModule = new AwesomeModule(AWESOME_MODULE_NAME, {
       });
       const lessFile = path.join(FRONTEND_JS_PATH, 'app.less');
 
-      webserverWrapper.injectAngularAppModules(MODULE_NAME, frontendJsFilesUri, AWESOME_MODULE_NAME, ['esn'], {
+      webserverWrapper.injectAngularAppModules(NAMESPACE, frontendJsFilesUri, AWESOME_MODULE_NAME, ['esn'], {
         localJsFiles: frontendJsFilesFullPath
       });
-      webserverWrapper.injectLess(MODULE_NAME, [lessFile], 'esn');
+      webserverWrapper.injectLess(NAMESPACE, [lessFile], 'esn');
 
-      webserverWrapper.addApp(MODULE_NAME, app);
+      webserverWrapper.addApp(NAMESPACE, app);
 
       return callback();
     }

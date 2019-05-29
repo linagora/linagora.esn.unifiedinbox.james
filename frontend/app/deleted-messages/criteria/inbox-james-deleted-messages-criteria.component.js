@@ -6,8 +6,7 @@
       templateUrl: '/unifiedinbox.james/app/deleted-messages/criteria/inbox-james-deleted-messages-criteria.html',
       controller: 'InboxJamesDeletedMessagesCriteriaController',
       bindings: {
-        criteria: '=',
-        onAddingCriterionBtnClick: '&'
+        criteria: '='
       }
     });
 })(angular);

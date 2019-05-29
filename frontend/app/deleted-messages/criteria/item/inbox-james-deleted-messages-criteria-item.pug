@@ -14,8 +14,9 @@ ng-form(name="form")
             ) {{::criterion.label | esnI18n}}
       .col-md-7.col-xs-12(ng-switch="$ctrl.criterion.fieldName")
         input.form-control.criterion-value(
-          type="text"
-          ng-switch-when="subject"
-          placeholder=__('Subject')
+          type="text",
+          ng-switch-when="subject",
+          placeholder=__('Subject'),
+          ng-model="$ctrl.criterion.value"
           required
         )

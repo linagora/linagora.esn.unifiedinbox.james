@@ -4,7 +4,12 @@
   angular.module('linagora.esn.unifiedinbox.james')
     .controller('InboxJamesDeletedMessagesRestoreController', InboxJamesDeletedMessagesRestoreController);
 
-  function InboxJamesDeletedMessagesRestoreController($q, asyncAction) {
+  function InboxJamesDeletedMessagesRestoreController(
+    session,
+    asyncAction,
+    inboxJamesDeletedMessagesService,
+    INBOX_JAMES_DELETED_MESSAGES
+  ) {
     var self = this;
     var SUBMIT_MESSAGES = {
       progressing: 'Submitting request...',
@@ -24,6 +29,8 @@
     function onRecoverBtnClick() {
       return asyncAction(SUBMIT_MESSAGES, function() {
         return _submitRecoverRequest();
+      }).then(function() {
+        _resetCriteria();
       });
     }
 
@@ -32,9 +39,20 @@
     }
 
     function _submitRecoverRequest() {
-      _resetCriteria();
+      var criteria = self.criteria.map(function(criterion) {
+        return {
+          fieldName: criterion.fieldName,
+          operator: criterion.operator,
+          value: criterion.value
+        };
+      });
 
-      return $q.when(); // TODO Implement this function when having restoring deleted messages endpoint
+      var requestContent = {
+        combinator: INBOX_JAMES_DELETED_MESSAGES.COMBINATOR,
+        criteria: criteria
+      };
+
+      return inboxJamesDeletedMessagesService.submitRestoringRequest(session.user._id, requestContent);
     }
 
     function _resetCriteria() {

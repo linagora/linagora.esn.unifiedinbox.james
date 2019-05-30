@@ -1,47 +1,34 @@
 const request = require('supertest');
 const { expect } = require('chai');
-const MODULE_NAME = 'linagora.esn.unifiedinbox.james';
 
 describe('The create restoring deleted messages request: POST /restoringDeletedMessagesRequest', () => {
-  let app, user;
+  let app, helpers, user;
   const password = 'secret';
 
   beforeEach(function(done) {
-    this.helpers.modules.initMidway(MODULE_NAME, err => {
-      expect(err).to.not.exist;
-      const server = require(this.testEnv.backendPath + '/webserver/application')(this.helpers.modules.current.deps);
-      const api = require(this.testEnv.backendPath + '/webserver/api')(this.helpers.modules.current.deps, this.helpers.modules.current.lib.lib);
+    const self = this;
 
-      server.use(require('body-parser').json());
-      server.use('/api', api);
+    helpers = this.helpers;
+    app = self.helpers.modules.current.app;
 
-      app = this.helpers.modules.getWebServer(server);
-      this.helpers.api.applyDomainDeployment('linagora_IT', (err, models) => {
-        if (err) {
-          return done(err);
-        }
-        user = models.users[0];
+    helpers.api.applyDomainDeployment('linagora_IT', (err, models) => {
+      if (err) {
+        return done(err);
+      }
+      user = models.users[0];
 
-        done();
-      });
-    });
-  });
-
-  afterEach(function(done) {
-    this.helpers.mongo.dropDatabase(err => {
-      if (err) return done(err);
-      this.testEnv.core.db.mongo.mongoose.connection.close(done);
+      done();
     });
   });
 
   it('should return 401 if not logged in', function(done) {
-    this.helpers.api.requireLogin(app, 'post', '/api/restoringDeletedMessagesRequest', done);
+    helpers.api.requireLogin(app, 'post', '/unifiedinbox.james/api/restoringDeletedMessagesRequest', done);
   });
 
   it('should return 400 if no targetUser given in request body', function(done) {
-    this.helpers.api.loginAsUser(app, user.emails[0], password, (err, requestAsMember) => {
+    helpers.api.loginAsUser(app, user.emails[0], password, (err, requestAsMember) => {
       expect(err).to.not.exist;
-      const req = requestAsMember(request(app).post('/api/restoringDeletedMessagesRequest'));
+      const req = requestAsMember(request(app).post('/unifiedinbox.james/api/restoringDeletedMessagesRequest'));
 
       req.send({});
       req.expect(400);
@@ -55,9 +42,9 @@ describe('The create restoring deleted messages request: POST /restoringDeletedM
   });
 
   it('should return 400 if no content given in request body', function(done) {
-    this.helpers.api.loginAsUser(app, user.emails[0], password, (err, requestAsMember) => {
+    helpers.api.loginAsUser(app, user.emails[0], password, (err, requestAsMember) => {
       expect(err).to.not.exist;
-      const req = requestAsMember(request(app).post('/api/restoringDeletedMessagesRequest'));
+      const req = requestAsMember(request(app).post('/unifiedinbox.james/api/restoringDeletedMessagesRequest'));
 
       req.send({
         targetUser: user._id
@@ -73,9 +60,9 @@ describe('The create restoring deleted messages request: POST /restoringDeletedM
   });
 
   it('should return 400 if no combinator given in request content', function(done) {
-    this.helpers.api.loginAsUser(app, user.emails[0], password, (err, requestAsMember) => {
+    helpers.api.loginAsUser(app, user.emails[0], password, (err, requestAsMember) => {
       expect(err).to.not.exist;
-      const req = requestAsMember(request(app).post('/api/restoringDeletedMessagesRequest'));
+      const req = requestAsMember(request(app).post('/unifiedinbox.james/api/restoringDeletedMessagesRequest'));
 
       req.send({
         targetUser: user._id,
@@ -92,9 +79,9 @@ describe('The create restoring deleted messages request: POST /restoringDeletedM
   });
 
   it('should return 400 if combinator given in request content is not supported', function(done) {
-    this.helpers.api.loginAsUser(app, user.emails[0], password, (err, requestAsMember) => {
+    helpers.api.loginAsUser(app, user.emails[0], password, (err, requestAsMember) => {
       expect(err).to.not.exist;
-      const req = requestAsMember(request(app).post('/api/restoringDeletedMessagesRequest'));
+      const req = requestAsMember(request(app).post('/unifiedinbox.james/api/restoringDeletedMessagesRequest'));
 
       req.send({
         targetUser: user._id,
@@ -111,9 +98,9 @@ describe('The create restoring deleted messages request: POST /restoringDeletedM
   });
 
   it('should return 400 if no criteria given in request content', function(done) {
-    this.helpers.api.loginAsUser(app, user.emails[0], password, (err, requestAsMember) => {
+    helpers.api.loginAsUser(app, user.emails[0], password, (err, requestAsMember) => {
       expect(err).to.not.exist;
-      const req = requestAsMember(request(app).post('/api/restoringDeletedMessagesRequest'));
+      const req = requestAsMember(request(app).post('/unifiedinbox.james/api/restoringDeletedMessagesRequest'));
 
       req.send({
         targetUser: user._id,
@@ -130,9 +117,9 @@ describe('The create restoring deleted messages request: POST /restoringDeletedM
   });
 
   it('should return 400 if criteria is not an array', function(done) {
-    this.helpers.api.loginAsUser(app, user.emails[0], password, (err, requestAsMember) => {
+    helpers.api.loginAsUser(app, user.emails[0], password, (err, requestAsMember) => {
       expect(err).to.not.exist;
-      const req = requestAsMember(request(app).post('/api/restoringDeletedMessagesRequest'));
+      const req = requestAsMember(request(app).post('/unifiedinbox.james/api/restoringDeletedMessagesRequest'));
 
       req.send({
         targetUser: user._id,
@@ -149,9 +136,9 @@ describe('The create restoring deleted messages request: POST /restoringDeletedM
   });
 
   it('should return 400 if criterion does not have "fieldName" property', function(done) {
-    this.helpers.api.loginAsUser(app, user.emails[0], password, (err, requestAsMember) => {
+    helpers.api.loginAsUser(app, user.emails[0], password, (err, requestAsMember) => {
       expect(err).to.not.exist;
-      const req = requestAsMember(request(app).post('/api/restoringDeletedMessagesRequest'));
+      const req = requestAsMember(request(app).post('/unifiedinbox.james/api/restoringDeletedMessagesRequest'));
 
       req.send({
         targetUser: user._id,
@@ -171,9 +158,9 @@ describe('The create restoring deleted messages request: POST /restoringDeletedM
   });
 
   it('should return 400 if criterion does not have "operator" property', function(done) {
-    this.helpers.api.loginAsUser(app, user.emails[0], password, (err, requestAsMember) => {
+    helpers.api.loginAsUser(app, user.emails[0], password, (err, requestAsMember) => {
       expect(err).to.not.exist;
-      const req = requestAsMember(request(app).post('/api/restoringDeletedMessagesRequest'));
+      const req = requestAsMember(request(app).post('/unifiedinbox.james/api/restoringDeletedMessagesRequest'));
 
       req.send({
         targetUser: user._id,
@@ -195,9 +182,9 @@ describe('The create restoring deleted messages request: POST /restoringDeletedM
   });
 
   it('should return 400 if criterion does not have "value" property', function(done) {
-    this.helpers.api.loginAsUser(app, user.emails[0], password, (err, requestAsMember) => {
+    helpers.api.loginAsUser(app, user.emails[0], password, (err, requestAsMember) => {
       expect(err).to.not.exist;
-      const req = requestAsMember(request(app).post('/api/restoringDeletedMessagesRequest'));
+      const req = requestAsMember(request(app).post('/unifiedinbox.james/api/restoringDeletedMessagesRequest'));
 
       req.send({
         targetUser: user._id,
@@ -220,9 +207,9 @@ describe('The create restoring deleted messages request: POST /restoringDeletedM
   });
 
   it('should return 400 if criterion fieldName is not supported', function(done) {
-    this.helpers.api.loginAsUser(app, user.emails[0], password, (err, requestAsMember) => {
+    helpers.api.loginAsUser(app, user.emails[0], password, (err, requestAsMember) => {
       expect(err).to.not.exist;
-      const req = requestAsMember(request(app).post('/api/restoringDeletedMessagesRequest'));
+      const req = requestAsMember(request(app).post('/unifiedinbox.james/api/restoringDeletedMessagesRequest'));
 
       req.send({
         targetUser: user._id,
@@ -246,9 +233,9 @@ describe('The create restoring deleted messages request: POST /restoringDeletedM
   });
 
   it('should return 400 if operator is not supported by fieldName', function(done) {
-    this.helpers.api.loginAsUser(app, user.emails[0], password, (err, requestAsMember) => {
+    helpers.api.loginAsUser(app, user.emails[0], password, (err, requestAsMember) => {
       expect(err).to.not.exist;
-      const req = requestAsMember(request(app).post('/api/restoringDeletedMessagesRequest'));
+      const req = requestAsMember(request(app).post('/unifiedinbox.james/api/restoringDeletedMessagesRequest'));
 
       req.send({
         targetUser: user._id,
@@ -272,9 +259,9 @@ describe('The create restoring deleted messages request: POST /restoringDeletedM
   });
 
   it('should return 400 if value is not supported by fieldName', function(done) {
-    this.helpers.api.loginAsUser(app, user.emails[0], password, (err, requestAsMember) => {
+    helpers.api.loginAsUser(app, user.emails[0], password, (err, requestAsMember) => {
       expect(err).to.not.exist;
-      const req = requestAsMember(request(app).post('/api/restoringDeletedMessagesRequest'));
+      const req = requestAsMember(request(app).post('/unifiedinbox.james/api/restoringDeletedMessagesRequest'));
 
       req.send({
         targetUser: user._id,
@@ -298,9 +285,9 @@ describe('The create restoring deleted messages request: POST /restoringDeletedM
   });
 
   it('should return 204 if criteria is well formed', function(done) {
-    this.helpers.api.loginAsUser(app, user.emails[0], password, (err, requestAsMember) => {
+    helpers.api.loginAsUser(app, user.emails[0], password, (err, requestAsMember) => {
       expect(err).to.not.exist;
-      const req = requestAsMember(request(app).post('/api/restoringDeletedMessagesRequest'));
+      const req = requestAsMember(request(app).post('/unifiedinbox.james/api/restoringDeletedMessagesRequest'));
 
       req.send({
         targetUser: user._id,

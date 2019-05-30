@@ -15,7 +15,6 @@
 
     function $onInit() {
       self.criteria = self.criteria || [];
-      self.availableCriteria = INBOX_JAMES_DELETED_MESSAGES.CRITERIA;
     }
 
     function onAddBtnClick() {

@@ -4,13 +4,14 @@ ng-form(name="form")
       .col-md-5.col-xs-12
         md-input-container
           md-select(
-            ng-model="$ctrl.criterion.operator",
+            ng-model="$ctrl.criterion.id",
             md-container-class="inbox-james-deleted-messages-select-dropdown",
-            aria-label="select criterion"
+            aria-label="select criterion",
+            ng-change="$ctrl.onCriterionIdChange()"
           )
             md-option(
               ng-repeat="criterion in $ctrl.availableCriteria"
-              ng-value="criterion.operator"
+              ng-value="criterion.id"
             ) {{::criterion.label | esnI18n}}
       .col-md-7.col-xs-12(ng-switch="$ctrl.criterion.fieldName")
         input.form-control.criterion-value(

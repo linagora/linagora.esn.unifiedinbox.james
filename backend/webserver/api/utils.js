@@ -3,9 +3,7 @@ module.exports = dependencies => {
 
   return {
     send500Error,
-    send409Error,
     send404Error,
-    send403Error,
     send400Error
   };
 
@@ -21,31 +19,11 @@ module.exports = dependencies => {
     });
   }
 
-  function send409Error(details, res) {
-    return res.status(409).json({
-      error: {
-        code: 409,
-        message: 'Conflict',
-        details
-      }
-    });
-  }
-
   function send404Error(details, res) {
     return res.status(404).json({
       error: {
         code: 404,
         message: 'Not Found',
-        details
-      }
-    });
-  }
-
-  function send403Error(details, res) {
-    return res.status(403).json({
-      error: {
-        code: 403,
-        message: 'Forbidden',
         details
       }
     });

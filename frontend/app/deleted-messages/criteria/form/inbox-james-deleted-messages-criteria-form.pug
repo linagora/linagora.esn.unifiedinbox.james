@@ -1,0 +1,22 @@
+ng-form(name="form")
+  .select-all-toggle
+    span #{__('Select all deleted messages?')}
+    span.select-all-option(ng-class='{"toggle-active": !$ctrl.selectAll}') #{__('No')}
+    toggle-switch(ng-model='$ctrl.selectAll', color='blue', onchange="$ctrl.onSelectAllToggleChange()")
+    span.select-all-option(ng-class='{"toggle-active": $ctrl.selectAll}') #{__('Yes')}
+
+  hr
+  
+  inbox-james-deleted-messages-criteria-item(
+    ng-repeat='criterion in $ctrl.displayedCriteria track by $index',
+    criterion='criterion',
+    delete-criterion="$ctrl.deleteCriterion($index)",
+    ng-if="!$ctrl.selectAll"
+  )
+
+  .no-criteria-message(ng-if="!$ctrl.selectAll && !$ctrl.displayedCriteria.length")
+    .message
+      .no-criteria-icon.mdi.mdi-format-list-bulleted
+      .message !{__('No criterion, click %s to add a new one', '<span class="mdi mdi-plus"></span>')}
+
+fab(icon="plus", ng-if="!$ctrl.selectAll", ng-click="$ctrl.addCriterion()")

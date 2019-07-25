@@ -10,7 +10,7 @@
         return;
       }
 
-      var recoverDeletedMessages = new dynamicDirectiveService.DynamicDirective(true, 'inbox-james-deleted-messages-restore', {
+      var recoverDeletedMessages = new dynamicDirectiveService.DynamicDirective(true, 'inbox-james-deleted-messages-restore-button', {
         attributes: [
           { name: 'ng-if', value: 'ctrl.mailbox.role.value === "trash"' }
         ]

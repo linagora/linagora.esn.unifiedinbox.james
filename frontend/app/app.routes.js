@@ -38,6 +38,14 @@
             template: '<inbox-james-dlp-settings />'
           }
         }
+      })
+      .state('unifiedinbox.deleted-messages', {
+        url: '/deleted-messages',
+        views: {
+          'main@unifiedinbox': {
+            template: '<inbox-james-deleted-messages-restore-request />'
+          }
+        }
       });
   });
 })(angular);

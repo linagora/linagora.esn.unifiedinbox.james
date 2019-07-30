@@ -26,3 +26,7 @@
         inbox-james-deleted-messages-criteria-subject-form(criterion="$ctrl.criterion")
       div(ng-switch-when='hasAttachment')
         inbox-james-deleted-messages-criteria-attachment-form(criterion="$ctrl.criterion")
+      div(ng-switch-when='recipients')
+        inbox-james-deleted-messages-criteria-participant-form(criterion="$ctrl.criterion", participant-type="'recipients'")
+      div(ng-switch-when='sender')
+        inbox-james-deleted-messages-criteria-participant-form(criterion="$ctrl.criterion", participant-type="'sender'")

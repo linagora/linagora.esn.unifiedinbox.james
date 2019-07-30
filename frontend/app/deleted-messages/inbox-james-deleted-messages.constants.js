@@ -11,10 +11,15 @@
         },
         FIELD_NAMES: [
           { value: 'subject', label: 'Subject' },
-          { value: 'hasAttachment', label: 'Attachment'}
+          { value: 'hasAttachment', label: 'Attachment'},
+          { value: 'recipients', label: 'Recipients' },
+          { value: 'sender', label: 'Sender' }
         ],
-        SUBJECT: 'subject',
-        ATTACHMENT: 'hasAttachment'
+        ATTACHMENT: 'hasAttachment',
+        RECIPIENTS: 'recipients',
+        SENDER: 'sender',
+        RECIPIENTS_OPERATOR: 'contains',
+        SENDER_OPERATOR: 'equals'
       }
     });
 })(angular);

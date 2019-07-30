@@ -26,7 +26,7 @@
     }
 
     function addCriterion() {
-      self.displayedCriteria.push(INBOX_JAMES_DELETED_MESSAGES.CRITERIA.DEFAULT_CRITERION);
+      self.displayedCriteria.push(_.clone(INBOX_JAMES_DELETED_MESSAGES.CRITERIA.DEFAULT_CRITERION));
       self.criteria = self.displayedCriteria;
 
       $timeout(function() {

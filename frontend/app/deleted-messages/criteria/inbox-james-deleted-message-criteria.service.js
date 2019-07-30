@@ -10,22 +10,22 @@
     };
 
     function getCriterionSummary(criterion) {
-      var summary;
-
       switch (criterion.fieldName) {
         case INBOX_JAMES_DELETED_MESSAGES.CRITERIA.SUBJECT:
-          summary = _getSubjectCriterionSummary(criterion);
-          break;
+          return _getSubjectCriterionSummary(criterion);
 
         case INBOX_JAMES_DELETED_MESSAGES.CRITERIA.ATTACHMENT:
-          summary = _getAttachmentCriterionSummary(criterion);
-          break;
+          return _getAttachmentCriterionSummary(criterion);
+
+        case INBOX_JAMES_DELETED_MESSAGES.CRITERIA.RECIPIENTS:
+          return _getRecipientsCriterionSummary(criterion);
+
+        case INBOX_JAMES_DELETED_MESSAGES.CRITERIA.SENDER:
+          return _getSenderCriterionSummary(criterion);
 
         default:
-          summary = '';
+          return '';
       }
-
-      return summary;
     }
 
     function _getSubjectCriterionSummary(criterion) {
@@ -63,6 +63,14 @@
       }
 
       return esnI18nService.translate(summary).toString();
+    }
+
+    function _getRecipientsCriterionSummary(criterion) {
+      return esnI18nService.translate('Messages whose recipients contain <b>%s</b>', criterion.value || '').toString();
+    }
+
+    function _getSenderCriterionSummary(criterion) {
+      return esnI18nService.translate('Messages whose sender is <b>%s</b>', criterion.value || '').toString();
     }
   }
 })(angular);

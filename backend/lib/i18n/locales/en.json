@@ -85,5 +85,9 @@
   "the words": "the words",
   "Has attachment": "Has attachment",
   "Messages have attachment": "Messages have attachment",
-  "Messages do not have attachment": "Messages do not have attachment"
+  "Messages do not have attachment": "Messages do not have attachment",
+  "Messages whose recipients contain <b>%s</b>": "Messages whose recipients contain <b>%s</b>",
+  "Messages whose recipients contain": "Messages whose recipients contain",
+  "Messages whose sender is <b>%s</b>": "Messages whose sender is <b>%s</b>",
+  "Messages whose sender is": "Messages whose sender is"
 }

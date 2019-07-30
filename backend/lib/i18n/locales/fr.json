@@ -85,5 +85,9 @@
   "the words": "les mots",
   "Has attachment": "A des pièces jointes",
   "Messages have attachment": "Les messages ont des pièces jointes",
-  "Messages do not have attachment": "Les messages n'ont pas de pièces jointes"
+  "Messages do not have attachment": "Les messages n'ont pas de pièces jointes",
+  "Messages whose recipients contain <b>%s</b>": "Messages dont les destinataires contiennent <b>%s</b>",
+  "Messages whose recipients contain": "Messages dont les destinataires contiennent",
+  "Messages whose sender is <b>%s</b>": "Messages dont l'expéditeur est <b>%s</b>",
+  "Messages whose sender is": "Messages dont l'expéditeur est"
 }

@@ -11,11 +11,11 @@
 
     function getCriterionSummary(criterion) {
       if (criterion.fieldName === INBOX_JAMES_DELETED_MESSAGES.CRITERIA.SUBJECT) {
-        return _getSubjectCriterionTemplate(criterion);
+        return _getSubjectCriterionSummary(criterion);
       }
     }
 
-    function _getSubjectCriterionTemplate(criterion) {
+    function _getSubjectCriterionSummary(criterion) {
       var summary;
 
       switch (criterion.operator) {
@@ -34,6 +34,9 @@
         case 'equalsIgnoreCase':
           summary = 'Messages whose subjects match <b>%s</b>';
           break;
+
+        default:
+          summary = '';
       }
 
       return esnI18nService.translate(summary, criterion.value || '').toString();

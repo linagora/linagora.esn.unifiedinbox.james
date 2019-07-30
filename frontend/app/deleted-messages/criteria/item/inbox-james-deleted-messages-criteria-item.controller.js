@@ -9,8 +9,16 @@
 
     self.types = INBOX_JAMES_DELETED_MESSAGES.CRITERIA.FIELD_NAMES;
 
-    self.getCriterionSummary = function() {
+    self.getCriterionSummary = getCriterionSummary;
+    self.resetCriterion = resetCriterion;
+
+    function getCriterionSummary() {
       return inboxJamesDeletedMessageCriteriaService.getCriterionSummary(self.criterion);
-    };
+    }
+
+    function resetCriterion() {
+      self.criterion.value = '';
+      self.criterion.operator = '';
+    }
   }
 })(angular);

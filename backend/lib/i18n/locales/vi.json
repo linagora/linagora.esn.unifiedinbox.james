@@ -82,5 +82,8 @@
   "contain": "chứa",
   "match exactly": "khớp chính xác",
   "match": "khớp",
-  "the words": "các từ sau"
+  "the words": "các từ sau",
+  "Has attachment": "Có tập tin đính kèm",
+  "Messages have attachment": "Thư có tập tin đính kèm",
+  "Messages do not have attachment": "Thư không có tập tin đính kèm"
 }

@@ -82,5 +82,8 @@
   "contain": "contain",
   "match exactly": "match exactly",
   "match": "match",
-  "the words": "the words"
+  "the words": "the words",
+  "Has attachment": "Has attachment",
+  "Messages have attachment": "Messages have attachment",
+  "Messages do not have attachment": "Messages do not have attachment"
 }

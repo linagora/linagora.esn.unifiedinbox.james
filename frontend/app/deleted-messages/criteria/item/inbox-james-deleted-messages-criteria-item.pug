@@ -24,3 +24,5 @@
     .criteria-form(ng-switch="$ctrl.criterion.fieldName")
       div(ng-switch-when='subject')
         inbox-james-deleted-messages-criteria-subject-form(criterion="$ctrl.criterion")
+      div(ng-switch-when='hasAttachment')
+        inbox-james-deleted-messages-criteria-attachment-form(criterion="$ctrl.criterion")

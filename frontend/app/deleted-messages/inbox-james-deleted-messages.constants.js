@@ -10,9 +10,11 @@
           operator: 'containsIgnoreCase'
         },
         FIELD_NAMES: [
-          { value: 'subject', label: 'Subject' }
+          { value: 'subject', label: 'Subject' },
+          { value: 'hasAttachment', label: 'Attachment'}
         ],
-        SUBJECT: 'subject'
+        SUBJECT: 'subject',
+        ATTACHMENT: 'hasAttachment'
       }
     });
 })(angular);

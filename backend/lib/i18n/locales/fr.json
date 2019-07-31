@@ -82,5 +82,8 @@
   "contain": "contiennent",
   "match exactly": "correspondent exactement",
   "match": "correspondent",
-  "the words": "les mots"
+  "the words": "les mots",
+  "Has attachment": "A des pièces jointes",
+  "Messages have attachment": "Les messages ont des pièces jointes",
+  "Messages do not have attachment": "Les messages n'ont pas de pièces jointes"
 }

@@ -89,5 +89,16 @@
   "Messages whose recipients contain <b>%s</b>": "Thư được gửi đến <b>%s</b>",
   "Messages whose recipients contain": "Thư được gửi đến",
   "Messages whose sender is <b>%s</b>": "Thư được gửi từ <b>%s</b>",
-  "Messages whose sender is": "Thư được gửi từ"
+  "Messages whose sender is": "Thư được gửi từ",
+  "Messages whose delivery date is before or on <b>%s</b>": "Thư gửi trước hoặc vào ngày <b>%s</b>",
+  "Messages whose delivery date is after or on <b>%s</b>": "Thư gửi từ ngày <b>%s</b>",
+  "Messages whose deletion date is before or on <b>%s</b>": "Thư xóa trước hoặc vào ngày <b>%s</b>",
+  "Messages whose deletion date is after or on <b>%s</b>": "Thư xóa từ ngày <b>%s</b>",
+  "Messages whose delivery date": "Thư có ngày gửi",
+  "Messages whose deletion date": "Thư có ngày xóa",
+  "is before or on": "trước hoặc vào ngày",
+  "is after or on": "từ ngày",
+  "the date": "ngày",
+  "Delivery date": "Ngày gửi",
+  "Deletion date": "Ngày xóa"
 }

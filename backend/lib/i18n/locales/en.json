@@ -89,5 +89,16 @@
   "Messages whose recipients contain <b>%s</b>": "Messages whose recipients contain <b>%s</b>",
   "Messages whose recipients contain": "Messages whose recipients contain",
   "Messages whose sender is <b>%s</b>": "Messages whose sender is <b>%s</b>",
-  "Messages whose sender is": "Messages whose sender is"
+  "Messages whose sender is": "Messages whose sender is",
+  "Messages whose delivery date is before or on <b>%s</b>": "Messages whose delivery date is before or on <b>%s</b>",
+  "Messages whose delivery date is after or on <b>%s</b>": "Messages whose delivery date is after or on <b>%s</b>",
+  "Messages whose deletion date is before or on <b>%s</b>": "Messages whose deletion date is before or on <b>%s</b>",
+  "Messages whose deletion date is after or on <b>%s</b>": "Messages whose deletion date is after or on <b>%s</b>",
+  "Messages whose delivery date": "Messages whose delivery date",
+  "Messages whose deletion date": "Messages whose deletion date",
+  "is before or on": "is before or on",
+  "is after or on": "is after or on",
+  "the date": "the date",
+  "Delivery date": "Delivery date",
+  "Deletion date": "Deletion date"
 }

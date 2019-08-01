@@ -4,7 +4,7 @@
   angular.module('linagora.esn.unifiedinbox.james')
     .factory('inboxJamesDeletedMessageCriteriaService', inboxJamesDeletedMessageCriteriaService);
 
-  function inboxJamesDeletedMessageCriteriaService(esnI18nService, INBOX_JAMES_DELETED_MESSAGES) {
+  function inboxJamesDeletedMessageCriteriaService(esnI18nService, esnDatetimeService, INBOX_JAMES_DELETED_MESSAGES) {
     return {
       getCriterionSummary: getCriterionSummary
     };
@@ -22,6 +22,12 @@
 
         case INBOX_JAMES_DELETED_MESSAGES.CRITERIA.SENDER:
           return _getSenderCriterionSummary(criterion);
+
+        case INBOX_JAMES_DELETED_MESSAGES.CRITERIA.DELIVERY_DATE:
+          return _getDateCriterionSummary(criterion);
+
+        case INBOX_JAMES_DELETED_MESSAGES.CRITERIA.DELETION_DATE:
+          return _getDateCriterionSummary(criterion);
 
         default:
           return '';
@@ -72,5 +78,22 @@
     function _getSenderCriterionSummary(criterion) {
       return esnI18nService.translate('Messages whose sender is <b>%s</b>', criterion.value || '').toString();
     }
+
+    function _getDateCriterionSummary(criterion) {
+      var fieldNameSummaryMapping = {
+        deliveryDate: 'Messages whose delivery date is',
+        deletionDate: 'Messages whose deletion date is'
+      };
+      var operatorSummaryMapping = {
+        beforeOrEquals: ' before or on <b>%s</b>',
+        afterOrEquals: ' after or on <b>%s</b>'
+      };
+
+      var summary = !operatorSummaryMapping[criterion.operator] ? '' :
+        fieldNameSummaryMapping[criterion.fieldName] + operatorSummaryMapping[criterion.operator];
+
+      return esnI18nService.translate(summary, esnDatetimeService.formatShortDate(criterion.value)).toString();
+    }
+
   }
 })(angular);

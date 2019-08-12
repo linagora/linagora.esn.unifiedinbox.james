@@ -15,6 +15,7 @@
           { value: 'recipients', label: 'Recipients' },
           { value: 'sender', label: 'Sender' }
         ],
+        SUBJECT: 'subject',
         ATTACHMENT: 'hasAttachment',
         RECIPIENTS: 'recipients',
         SENDER: 'sender',

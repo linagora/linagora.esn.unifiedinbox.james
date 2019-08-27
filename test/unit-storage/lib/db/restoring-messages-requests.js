@@ -2,7 +2,7 @@ const chai = require('chai');
 const expect = chai.expect;
 
 describe('The UnifiedInboxRestoringDeletedMessagesRequests model', function() {
-  let UnifiedInboxRestoringDeletedMessagesRequests, ObjectId, mongoose, pubsub;
+  let UnifiedInboxRestoringDeletedMessagesRequests, ObjectId, mongoose;
   let RESTORING_MESSAGES_REQUEST;
 
   beforeEach(function(done) {

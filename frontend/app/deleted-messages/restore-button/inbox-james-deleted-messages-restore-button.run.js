@@ -5,7 +5,7 @@
     .run(runBlock);
 
   function runBlock(esnConfig, dynamicDirectiveService) {
-    return esnConfig('linagora.esn.unifiedinbox.deletedMessages', {}).then(function(deletedMessagesConfig) {
+    return esnConfig('linagora.esn.james.deletedMessages', {}).then(function(deletedMessagesConfig) {
       if (!deletedMessagesConfig.restore || !deletedMessagesConfig.restore.isEnabled) {
         return;
       }

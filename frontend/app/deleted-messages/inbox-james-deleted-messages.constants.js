@@ -26,5 +26,9 @@
         DELIVERY_DATE: 'deliveryDate',
         DELETION_DATE: 'deletionDate'
       }
+    })
+    .constant('INBOX_RESTORED_MESSAGES_MAILBOX', {
+      role: 'restored messages',
+      icon: 'mdi mdi-backup-restore'
     });
 })(angular);

@@ -11,6 +11,7 @@ const schema = {
     },
     criteria: {
       type: 'array',
+      minItems: 1,
       items: {
         type: 'object',
         properties: {

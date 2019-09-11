@@ -68,3 +68,7 @@ angular.module('mgcrea.ngStrap.modal', [])
   .factory('$modal', function() {
     return angular.noop;
   });
+angular.module('esn.scroll', [])
+  .factory('elementScrollService', function() {
+    return {};
+  });

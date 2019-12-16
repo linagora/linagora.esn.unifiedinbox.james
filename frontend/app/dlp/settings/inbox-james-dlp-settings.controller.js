@@ -8,7 +8,7 @@
     uuid4,
     session,
     asyncAction,
-    jamesWebadminClient
+    jamesApiClient
   ) {
     var self = this;
     var notificationMessages = {
@@ -16,7 +16,7 @@
       success: 'Rules stored',
       failure: 'Failed to store rules'
     };
-    var DOMAIN_NAME = session.domain.name;
+    var DOMAIN_ID = session.domain._id;
 
     self.$onInit = $onInit;
     self.addForm = addForm;
@@ -25,7 +25,7 @@
     function $onInit() {
       self.status = 'loading';
 
-      jamesWebadminClient.listDlpRules(DOMAIN_NAME)
+      jamesApiClient.listDlpRules(DOMAIN_ID)
         .then(function(rules) {
           self.rules = rules;
           self.status = 'loaded';
@@ -45,7 +45,7 @@
       self.rules = _qualifyRules(self.rules);
 
       return asyncAction(notificationMessages, function() {
-        return jamesWebadminClient.storeDlpRules(DOMAIN_NAME, self.rules);
+        return jamesApiClient.storeDlpRules(DOMAIN_ID, self.rules);
       });
     }
 

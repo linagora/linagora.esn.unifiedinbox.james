@@ -7,7 +7,7 @@
   function inboxJamesDlpRuleDisplayerController(
     session,
     esnI18nService,
-    jamesWebadminClient,
+    jamesApiClient,
     inboxJamesDlpService,
     INBOX_JAMES_DLP_MAIL_REPOSITORY_PATH_PREFIXES
   ) {
@@ -25,8 +25,8 @@
         !!self.email.attributes.DlpMatchedRule &&
         repositoriesToDisplay.indexOf(self.email.repository) !== -1;
 
-      self.shouldDisplay && jamesWebadminClient.getDlpRule(
-        session.domain.name,
+      self.shouldDisplay && jamesApiClient.getDlpRule(
+        session.domain._id,
         self.email.attributes.DlpMatchedRule
       ).then(function(rule) {
         self.rule = _processRule(rule);

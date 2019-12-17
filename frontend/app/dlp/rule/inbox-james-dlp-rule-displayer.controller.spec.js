@@ -6,31 +6,36 @@ var expect = chai.expect;
 
 describe('The inboxJamesDlpRuleDisplayerController', function() {
   var $rootScope, $controller;
-  var session, jamesWebadminClient, inboxJamesDlpService;
+  var session, inboxJamesDlpService;
+  var jamesApiClientMock;
   var INBOX_JAMES_DLP_MAIL_REPOSITORY_PATH_PREFIXES;
-  var DOMAIN_NAME = 'lng.org';
+  var DOMAIN_ID = '1';
 
   beforeEach(function() {
     module('linagora.esn.unifiedinbox.james');
+
+    jamesApiClientMock = { getDlpRule: function() {} };
+
+    module(function($provide) {
+      $provide.value('jamesApiClient', jamesApiClientMock);
+    });
 
     inject(function(
       _$rootScope_,
       _$controller_,
       _session_,
-      _jamesWebadminClient_,
       _inboxJamesDlpService_,
       _INBOX_JAMES_DLP_MAIL_REPOSITORY_PATH_PREFIXES_
     ) {
       $rootScope = _$rootScope_;
       $controller = _$controller_;
       session = _session_;
-      jamesWebadminClient = _jamesWebadminClient_;
       inboxJamesDlpService = _inboxJamesDlpService_;
       INBOX_JAMES_DLP_MAIL_REPOSITORY_PATH_PREFIXES = _INBOX_JAMES_DLP_MAIL_REPOSITORY_PATH_PREFIXES_;
     });
 
     session.domain = {
-      name: DOMAIN_NAME
+      _id: DOMAIN_ID
     };
   });
 
@@ -66,7 +71,7 @@ describe('The inboxJamesDlpRuleDisplayerController', function() {
     });
 
     it('should get rule details for valid mail that contains matched rule and in correct repository', function() {
-      jamesWebadminClient.getDlpRule = sinon.stub().returns($q.when({
+      jamesApiClientMock.getDlpRule = sinon.stub().returns($q.when({
         targetsSender: true,
         targetsContent: true,
         targetsRecipients: true
@@ -78,11 +83,11 @@ describe('The inboxJamesDlpRuleDisplayerController', function() {
       });
 
       expect(controller.shouldDisplay).to.be.true;
-      expect(jamesWebadminClient.getDlpRule).to.have.been.called;
+      expect(jamesApiClientMock.getDlpRule).to.have.been.called;
     });
 
     it('should display rule details with matching source based on the rule details', function() {
-      jamesWebadminClient.getDlpRule = sinon.stub().returns($q.when({
+      jamesApiClientMock.getDlpRule = sinon.stub().returns($q.when({
         targetsSender: true,
         targetsContent: true,
         targetsRecipients: false
@@ -94,7 +99,7 @@ describe('The inboxJamesDlpRuleDisplayerController', function() {
       });
 
       expect(controller.shouldDisplay).to.be.true;
-      expect(jamesWebadminClient.getDlpRule).to.have.been.called;
+      expect(jamesApiClientMock.getDlpRule).to.have.been.called;
       expect(controller.rule.source).to.equal('message content, sender');
     });
   });

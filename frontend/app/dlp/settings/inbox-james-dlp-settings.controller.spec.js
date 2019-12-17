@@ -6,9 +6,9 @@ var expect = chai.expect;
 
 describe('The inboxJamesDlpSettingsController', function() {
   var $rootScope, $controller;
-  var session, jamesWebadminClient;
-  var uuid4Mock;
-  var DOMAIN_NAME = 'lng.org';
+  var session;
+  var uuid4Mock, jamesApiClientMock;
+  var DOMAIN_ID = '1';
 
   beforeEach(function() {
     module('linagora.esn.unifiedinbox.james');
@@ -20,24 +20,28 @@ describe('The inboxJamesDlpSettingsController', function() {
       }
     };
 
+    jamesApiClientMock = {
+      listDlpRules: function() {},
+      storeDlpRules: function() {}
+    };
+
     module(function($provide) {
       $provide.value('uuid4', uuid4Mock);
+      $provide.value('jamesApiClient', jamesApiClientMock);
     });
 
     inject(function(
       _$rootScope_,
       _$controller_,
-      _session_,
-      _jamesWebadminClient_
+      _session_
     ) {
       $rootScope = _$rootScope_;
       $controller = _$controller_;
       session = _session_;
-      jamesWebadminClient = _jamesWebadminClient_;
     });
 
     session.domain = {
-      name: DOMAIN_NAME
+      _id: DOMAIN_ID
     };
   });
 
@@ -53,7 +57,7 @@ describe('The inboxJamesDlpSettingsController', function() {
   }
 
   describe('The $onInit function', function() {
-    it('should call #jamesWebadminClient.listDlpRules to list rules', function() {
+    it('should call listDlpRules from James module to list rules', function() {
       var rules = [{
         id: '1',
         expression: 'abc',
@@ -63,18 +67,19 @@ describe('The inboxJamesDlpSettingsController', function() {
         targetsContent: true
       }];
 
-      jamesWebadminClient.listDlpRules = sinon.stub().returns($q.when(rules));
+      jamesApiClientMock.listDlpRules = sinon.stub().returns($q.when(rules));
 
       var controller = initController();
 
       expect(controller.rules).to.deep.equal(rules);
-      expect(jamesWebadminClient.listDlpRules).to.have.been.calledWith(DOMAIN_NAME);
+      expect(jamesApiClientMock.listDlpRules).to.have.been.calledOnce;
+      expect(jamesApiClientMock.listDlpRules).to.have.been.calledWith(DOMAIN_ID);
     });
   });
 
   describe('The addForm function', function() {
     it('should append a new rule at the top of list rules', function() {
-      jamesWebadminClient.listDlpRules = function() {
+      jamesApiClientMock.listDlpRules = function() {
         return $q.when([]);
       };
 
@@ -89,11 +94,11 @@ describe('The inboxJamesDlpSettingsController', function() {
   });
 
   describe('The onFormSubmit function', function() {
-    it('should call #jamesWebadminClient.storeDlpRules to store the qualified rules', function() {
-      jamesWebadminClient.listDlpRules = function() {
+    it('should call storeDlpRules from James module to store the qualified rules', function() {
+      jamesApiClientMock.listDlpRules = function() {
         return $q.when([]);
       };
-      jamesWebadminClient.storeDlpRules = sinon.stub().returns($q.when());
+      jamesApiClientMock.storeDlpRules = sinon.stub().returns($q.when());
       var rules = [{
         id: '1',
         expression: 'rule1',
@@ -125,7 +130,8 @@ describe('The inboxJamesDlpSettingsController', function() {
       controller.onFormSubmit();
       $rootScope.$digest();
 
-      expect(jamesWebadminClient.storeDlpRules).to.have.been.calledWith(DOMAIN_NAME, expectedRules);
+      expect(jamesApiClientMock.storeDlpRules).to.have.been.calledOnce;
+      expect(jamesApiClientMock.storeDlpRules).to.have.been.calledWith(DOMAIN_ID, expectedRules);
       expect(controller.rules).to.deep.equal(expectedRules);
     });
   });

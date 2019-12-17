@@ -11,7 +11,6 @@ describe('The UnifiedInboxRestoringMessagesRequests model', function() {
 
     RESTORING_MESSAGES_REQUEST = require(`${this.testEnv.backendPath}/lib/constants`).RESTORING_MESSAGES_REQUEST;
 
-    require(`${this.testEnv.backendPath}/lib`)(this.moduleHelpers.dependencies);
     UnifiedInboxRestoringMessagesRequests = mongoose.model('UnifiedInboxRestoringMessagesRequests');
 
     this.connectMongoose(mongoose, done);

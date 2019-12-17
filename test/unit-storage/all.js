@@ -58,7 +58,7 @@ before(function(done) {
   loader.load(MODULE_NAME, done);
 });
 
-beforeEach(function() {
+before(function() {
   mockery.enable({ warnOnReplace: false, warnOnUnregistered: false, useCleanCache: true });
   const depsStore = {
     db: require('linagora-rse/backend/core/db')
@@ -73,4 +73,6 @@ beforeEach(function() {
     dependencies,
     addDep
   };
+
+  require(`${this.testEnv.backendPath}/lib`)(this.moduleHelpers.dependencies);
 });

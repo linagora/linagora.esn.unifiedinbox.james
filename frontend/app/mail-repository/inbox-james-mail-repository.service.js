@@ -10,12 +10,15 @@
     $modal,
     $rootScope,
     InboxJamesMailRepositoryEmail,
-    jamesWebadminClient,
+    jamesApiClient,
+    session,
     userAPI,
     userUtils,
     INBOX_JAMES_MAIL_REPOSITORY_EMAIL_FIELDS,
     INBOX_JAMES_MAIL_REPOSITORY_EVENTS
   ) {
+    var DOMAIN_ID = session.domain._id;
+
     return {
       deleteAllMails: deleteAllMails,
       deleteMails: deleteMails,
@@ -24,13 +27,13 @@
       openMailsDeletingModal: openMailsDeletingModal
     };
 
-    function downloadEmlFile(repositoryId, emailKey) {
-      jamesWebadminClient.downloadEmlFileFromMailRepository(repositoryId, emailKey);
+    function downloadEmlFile(mailRepository, emailKey) {
+      jamesApiClient.downloadEmlFileFromMailRepository(DOMAIN_ID, mailRepository, emailKey);
     }
 
     function deleteMails(emails) {
       return $q.all(emails.map(function(email) {
-        return jamesWebadminClient.deleteMailInMailRepository(email.repository, email.name);
+        return jamesApiClient.removeMailFromMailRepository(DOMAIN_ID, email.repository, email.name);
       })).then(function() {
         $rootScope.$broadcast(INBOX_JAMES_MAIL_REPOSITORY_EVENTS.MAILS_REMOVED, {
           emails: emails
@@ -38,8 +41,8 @@
       });
     }
 
-    function deleteAllMails(repositoryId) {
-      return jamesWebadminClient.deleteAllMailsInMailRepository(repositoryId)
+    function deleteAllMails(repository) {
+      return jamesApiClient.removeAllMailsFromMailRepository(DOMAIN_ID, repository)
         .then(function() {
           $rootScope.$broadcast(INBOX_JAMES_MAIL_REPOSITORY_EVENTS.ALL_MAILS_REMOVED);
         });
@@ -47,7 +50,7 @@
 
     function openMailsDeletingModal(context) {
       $modal({
-        templateUrl: '/linagora.esn.unifiedinbox.james/app/mail-repository/email/delete/inbox-james-mail-repository-email-delete-dialog.html',
+        templateUrl: '/unifiedinbox.james/app/mail-repository/email/delete/inbox-james-mail-repository-email-delete-dialog.html',
         backdrop: 'static',
         placement: 'center',
         controller: 'inboxJamesMailRepositoryEmailDeleteDialogController',
@@ -58,20 +61,20 @@
       });
     }
 
-    function list(repositoryId, options) {
-      return jamesWebadminClient.listMailsInMailRepository(repositoryId, options)
+    function list(mailRepository, options) {
+      return jamesApiClient.listMailsFromMailRepository(DOMAIN_ID, mailRepository, options)
         .then(function(emailKeys) {
           var gettingAllMails = emailKeys.map(function(key) {
-            return _getMailDetails(repositoryId, key);
+            return _getMailDetails(DOMAIN_ID, mailRepository, key);
           });
 
           return $q.all(gettingAllMails);
         });
     }
 
-    function _getMailDetails(repositoryId, emailKey) {
-      return jamesWebadminClient.getMailInMailRepository(repositoryId, emailKey, {
-        additionalFields: INBOX_JAMES_MAIL_REPOSITORY_EMAIL_FIELDS
+    function _getMailDetails(domainId, mailRepository, emailKey) {
+      return jamesApiClient.getMailFromMailRepository(domainId, mailRepository, emailKey, {
+        additionalFields: INBOX_JAMES_MAIL_REPOSITORY_EMAIL_FIELDS.join(',')
       }).then(_includeRepository)
         .then(_populateSender)
         .then(function(email) {
@@ -79,7 +82,7 @@
         });
 
       function _includeRepository(email) {
-        email.repository = repositoryId;
+        email.repository = mailRepository;
 
         return email;
       }

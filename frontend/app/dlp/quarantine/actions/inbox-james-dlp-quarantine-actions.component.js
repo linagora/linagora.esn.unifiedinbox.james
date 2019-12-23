@@ -3,7 +3,7 @@
 
   angular.module('linagora.esn.unifiedinbox.james')
     .component('inboxJamesDlpQuarantineActions', {
-      templateUrl: '/linagora.esn.unifiedinbox.james/app/dlp/quarantine/actions/inbox-james-dlp-quarantine-actions.html',
+      templateUrl: '/unifiedinbox.james/app/dlp/quarantine/actions/inbox-james-dlp-quarantine-actions.html',
       controller: 'inboxJamesDlpQuarantineActionsController',
       bindings: {
         bulkAction: '<',

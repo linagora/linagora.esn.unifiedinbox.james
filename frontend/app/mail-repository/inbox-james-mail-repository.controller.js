@@ -36,7 +36,7 @@
     }
 
     function downloadMail(email) {
-      inboxJamesMailRepository.downloadEmlFile(self.path, email.name);
+      inboxJamesMailRepository.downloadEmlFile(self.repository, email.name);
     }
 
     function deleteMail(email) {
@@ -65,7 +65,7 @@
     function _loadNextItems() {
       options.offset = self.elements.length;
 
-      return inboxJamesMailRepository.list(self.path, options);
+      return inboxJamesMailRepository.list(self.repository, options);
     }
   }
 })(angular);

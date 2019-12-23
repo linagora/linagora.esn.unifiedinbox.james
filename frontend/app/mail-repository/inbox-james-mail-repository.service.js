@@ -50,7 +50,7 @@
 
     function openMailsDeletingModal(context) {
       $modal({
-        templateUrl: '/linagora.esn.unifiedinbox.james/app/mail-repository/email/delete/inbox-james-mail-repository-email-delete-dialog.html',
+        templateUrl: '/unifiedinbox.james/app/mail-repository/email/delete/inbox-james-mail-repository-email-delete-dialog.html',
         backdrop: 'static',
         placement: 'center',
         controller: 'inboxJamesMailRepositoryEmailDeleteDialogController',

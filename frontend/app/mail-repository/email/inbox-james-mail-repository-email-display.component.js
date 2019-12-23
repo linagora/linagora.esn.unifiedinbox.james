@@ -3,7 +3,7 @@
 
   angular.module('linagora.esn.unifiedinbox.james')
     .component('inboxJamesMailRepositoryEmailDisplay', {
-      templateUrl: '/linagora.esn.unifiedinbox.james/app/mail-repository/email/inbox-james-mail-repository-email-display.html',
+      templateUrl: '/unifiedinbox.james/app/mail-repository/email/inbox-james-mail-repository-email-display.html',
       bindings: {
         email: '<',
         download: '&',

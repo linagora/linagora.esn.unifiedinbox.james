@@ -2,7 +2,7 @@
   'use strict';
 
   var MODULE_NAME = 'linagora.esn.unifiedinbox.james';
-  var MODULE_DIR_NAME = '/linagora.esn.unifiedinbox.james';
+  var MODULE_DIR_NAME = '/unifiedinbox.james';
 
   angular.module(MODULE_NAME)
     .factory('inboxJamesRestangular', inboxJamesRestangular);

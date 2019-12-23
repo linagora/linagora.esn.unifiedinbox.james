@@ -3,7 +3,7 @@
 
   angular.module('linagora.esn.unifiedinbox.james')
     .component('inboxJamesDlpRejected', {
-      templateUrl: '/linagora.esn.unifiedinbox.james/app/dlp/rejected/inbox-james-dlp-rejected.html',
+      templateUrl: '/unifiedinbox.james/app/dlp/rejected/inbox-james-dlp-rejected.html',
       controller: 'inboxJamesDlpRejectedController'
     });
 })(angular);

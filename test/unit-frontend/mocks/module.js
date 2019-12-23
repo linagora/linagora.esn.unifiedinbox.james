@@ -26,7 +26,7 @@ angular.module('esn.configuration', [])
     };
   });
 angular.module('linagora.esn.james', [])
-  .factory('jamesWebadminClient', function() {
+  .factory('jamesApiClient', function() {
     return {};
   });
 angular.module('esn.async-action', [])

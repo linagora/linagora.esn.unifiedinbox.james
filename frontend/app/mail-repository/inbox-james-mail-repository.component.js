@@ -6,7 +6,7 @@
       templateUrl: '/linagora.esn.unifiedinbox.james/app/mail-repository/inbox-james-mail-repository.html',
       controller: 'inboxJamesMailRepositoryController',
       bindings: {
-        path: '<'
+        repository: '<'
       }
     });
 })(angular);

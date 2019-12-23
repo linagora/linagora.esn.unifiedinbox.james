@@ -8,15 +8,14 @@
     $q,
     $rootScope,
     asyncAction,
-    jamesWebadminClient,
-    inboxJamesDlpService,
+    jamesApiClient,
     inboxJamesMailRepositoryEmailSelection,
+    session,
     INBOX_JAMES_MAIL_REPOSITORY_PROCESSORS,
-    INBOX_JAMES_DLP_MAIL_REPOSITORY_PATH_PREFIXES,
     INBOX_JAMES_MAIL_REPOSITORY_EVENTS
   ) {
     var self = this;
-    var repositoryId = inboxJamesDlpService.getMailRepositoryPath(INBOX_JAMES_DLP_MAIL_REPOSITORY_PATH_PREFIXES.REJECTED);
+    var DOMAIN_ID = session.domain._id;
     var REVISE_MESSAGES = {
       progressing: 'Moving mails...',
       success: 'Emails moved to quarantined repository',
@@ -34,11 +33,22 @@
     function _quarantineMails() {
       var processor = INBOX_JAMES_MAIL_REPOSITORY_PROCESSORS.QUARANTINE;
 
+      if (self.bulkAction) {
+        return jamesApiClient.reprocessAllMailsFromMailRepository(
+          DOMAIN_ID,
+          self.email.repository,
+          { processor: processor }
+        ).then(function() {
+          $rootScope.$broadcast(INBOX_JAMES_MAIL_REPOSITORY_EVENTS.ALL_MAILS_REMOVED);
+        });
+      }
+
       if (self.email) {
         self.onClick();
 
-        return jamesWebadminClient.reprocessMailFromMailRepository(
-          repositoryId,
+        return jamesApiClient.reprocessMailFromMailRepository(
+          DOMAIN_ID,
+          self.email.repository,
           self.email.name,
           { processor: processor }
         ).then(function() {
@@ -48,20 +58,12 @@
         });
       }
 
-      if (self.bulkAction) {
-        return jamesWebadminClient.reprocessAllMailsFromMailRepository(
-          repositoryId,
-          { processor: processor }
-        ).then(function() {
-          $rootScope.$broadcast(INBOX_JAMES_MAIL_REPOSITORY_EVENTS.ALL_MAILS_REMOVED);
-        });
-      }
-
       var selectedEmails = inboxJamesMailRepositoryEmailSelection.getSelected();
 
       return $q.all(selectedEmails.map(function(email) {
-        return jamesWebadminClient.reprocessMailFromMailRepository(
-          repositoryId,
+        return jamesApiClient.reprocessMailFromMailRepository(
+          DOMAIN_ID,
+          email.repository,
           email.name,
           { processor: processor }
         );

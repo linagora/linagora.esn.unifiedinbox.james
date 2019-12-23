@@ -4,16 +4,13 @@
   angular.module('linagora.esn.unifiedinbox.james')
     .controller('inboxJamesDlpQuarantineController', inboxJamesDlpQuarantineController);
 
-  function inboxJamesDlpQuarantineController(
-    inboxJamesDlpService,
-    INBOX_JAMES_DLP_MAIL_REPOSITORY_PATH_PREFIXES
-  ) {
+  function inboxJamesDlpQuarantineController(INBOX_JAMES_DLP_MAIL_REPOSITORIES) {
     var self = this;
 
     self.$onInit = $onInit;
 
     function $onInit() {
-      self.mailRepositoryPath = inboxJamesDlpService.getMailRepositoryPath(INBOX_JAMES_DLP_MAIL_REPOSITORY_PATH_PREFIXES.QUARANTINE);
+      self.mailRepository = INBOX_JAMES_DLP_MAIL_REPOSITORIES.QUARANTINE;
     }
   }
 })(angular);

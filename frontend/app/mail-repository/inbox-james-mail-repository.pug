@@ -1,5 +1,5 @@
 .fadeIn200ms
-  inbox-james-mail-repository-header(ng-if="$ctrl.elements.length > 0", emails='$ctrl.elements', repository="{{::$ctrl.path}}")
+  inbox-james-mail-repository-header(ng-if="$ctrl.elements.length > 0", emails='$ctrl.elements', repository="{{::$ctrl.repository}}")
   infinite-list.inbox-infinite-list(load-more-elements='$ctrl.loadMoreElements()', scroll-inside-container='$ctrl.scrollInsideContainer')
     .listview.lv-bordered.lv-lg(ng-if='$ctrl.elements.length > 0')
       .lv-body

@@ -4,16 +4,13 @@
   angular.module('linagora.esn.unifiedinbox.james')
     .controller('inboxJamesDlpRejectedController', inboxJamesDlpRejectedController);
 
-  function inboxJamesDlpRejectedController(
-    inboxJamesDlpService,
-    INBOX_JAMES_DLP_MAIL_REPOSITORY_PATH_PREFIXES
-  ) {
+  function inboxJamesDlpRejectedController(INBOX_JAMES_DLP_MAIL_REPOSITORIES) {
     var self = this;
 
     self.$onInit = $onInit;
 
     function $onInit() {
-      self.mailRepositoryPath = inboxJamesDlpService.getMailRepositoryPath(INBOX_JAMES_DLP_MAIL_REPOSITORY_PATH_PREFIXES.REJECTED);
+      self.mailRepository = INBOX_JAMES_DLP_MAIL_REPOSITORIES.REJECTED;
     }
   }
 })(angular);

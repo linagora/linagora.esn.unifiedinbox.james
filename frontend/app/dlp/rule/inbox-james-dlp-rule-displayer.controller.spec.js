@@ -6,9 +6,9 @@ var expect = chai.expect;
 
 describe('The inboxJamesDlpRuleDisplayerController', function() {
   var $rootScope, $controller;
-  var session, inboxJamesDlpService;
+  var session;
   var jamesApiClientMock;
-  var INBOX_JAMES_DLP_MAIL_REPOSITORY_PATH_PREFIXES;
+  var INBOX_JAMES_DLP_MAIL_REPOSITORIES;
   var DOMAIN_ID = '1';
 
   beforeEach(function() {
@@ -24,19 +24,15 @@ describe('The inboxJamesDlpRuleDisplayerController', function() {
       _$rootScope_,
       _$controller_,
       _session_,
-      _inboxJamesDlpService_,
-      _INBOX_JAMES_DLP_MAIL_REPOSITORY_PATH_PREFIXES_
+      _INBOX_JAMES_DLP_MAIL_REPOSITORIES_
     ) {
       $rootScope = _$rootScope_;
       $controller = _$controller_;
       session = _session_;
-      inboxJamesDlpService = _inboxJamesDlpService_;
-      INBOX_JAMES_DLP_MAIL_REPOSITORY_PATH_PREFIXES = _INBOX_JAMES_DLP_MAIL_REPOSITORY_PATH_PREFIXES_;
+      INBOX_JAMES_DLP_MAIL_REPOSITORIES = _INBOX_JAMES_DLP_MAIL_REPOSITORIES_;
     });
 
-    session.domain = {
-      _id: DOMAIN_ID
-    };
+    session.domain._id = DOMAIN_ID;
   });
 
   function initController(email) {
@@ -54,7 +50,7 @@ describe('The inboxJamesDlpRuleDisplayerController', function() {
   describe('The $onInit function', function() {
     it('should not display rule details if mail is not from quarantine or rejected repository', function() {
       var controller = initController({
-        repository: '/invalid/repository',
+        repository: 'a',
         attributes: { DlpMatchedRule: '123' }
       });
 
@@ -63,7 +59,7 @@ describe('The inboxJamesDlpRuleDisplayerController', function() {
 
     it('should not display rule details if mail object does not contain dlp matched rule', function() {
       var controller = initController({
-        repository: inboxJamesDlpService.getMailRepositoryPath(INBOX_JAMES_DLP_MAIL_REPOSITORY_PATH_PREFIXES.QUARANTINE),
+        repository: INBOX_JAMES_DLP_MAIL_REPOSITORIES.QUARANTINE,
         attributes: {}
       });
 
@@ -78,7 +74,7 @@ describe('The inboxJamesDlpRuleDisplayerController', function() {
       }));
 
       var controller = initController({
-        repository: inboxJamesDlpService.getMailRepositoryPath(INBOX_JAMES_DLP_MAIL_REPOSITORY_PATH_PREFIXES.QUARANTINE),
+        repository: INBOX_JAMES_DLP_MAIL_REPOSITORIES.QUARANTINE,
         attributes: { DlpMatchedRule: '123' }
       });
 
@@ -94,7 +90,7 @@ describe('The inboxJamesDlpRuleDisplayerController', function() {
       }));
 
       var controller = initController({
-        repository: inboxJamesDlpService.getMailRepositoryPath(INBOX_JAMES_DLP_MAIL_REPOSITORY_PATH_PREFIXES.QUARANTINE),
+        repository: INBOX_JAMES_DLP_MAIL_REPOSITORIES.QUARANTINE,
         attributes: { DlpMatchedRule: '123' }
       });
 

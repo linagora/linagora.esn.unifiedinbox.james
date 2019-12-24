@@ -6,34 +6,40 @@ var expect = chai.expect;
 
 describe('The inboxJamesDlpRejectedActionsController', function() {
   var $rootScope, $controller;
-  var jamesWebadminClient, inboxJamesDlpService, inboxJamesMailRepositoryEmailSelection;
+  var inboxJamesMailRepositoryEmailSelection, session;
+  var jamesApiClientMock;
   var INBOX_JAMES_MAIL_REPOSITORY_PROCESSORS, INBOX_JAMES_MAIL_REPOSITORY_EVENTS;
-  var REPOSITORY_PATH = '/repository/path';
+  var DOMAIN_ID = '1';
 
   beforeEach(function() {
     module('linagora.esn.unifiedinbox.james');
 
+    jamesApiClientMock = {
+      reprocessAllMailsFromMailRepository: function() {},
+      reprocessMailFromMailRepository: function() {}
+    };
+
+    module(function($provide) {
+      $provide.value('jamesApiClient', jamesApiClientMock);
+    });
+
     inject(function(
       _$rootScope_,
       _$controller_,
-      _jamesWebadminClient_,
-      _inboxJamesDlpService_,
       _inboxJamesMailRepositoryEmailSelection_,
+      _session_,
       _INBOX_JAMES_MAIL_REPOSITORY_PROCESSORS_,
       _INBOX_JAMES_MAIL_REPOSITORY_EVENTS_
     ) {
       $rootScope = _$rootScope_;
       $controller = _$controller_;
-      jamesWebadminClient = _jamesWebadminClient_;
-      inboxJamesDlpService = _inboxJamesDlpService_;
       inboxJamesMailRepositoryEmailSelection = _inboxJamesMailRepositoryEmailSelection_;
+      session = _session_;
       INBOX_JAMES_MAIL_REPOSITORY_PROCESSORS = _INBOX_JAMES_MAIL_REPOSITORY_PROCESSORS_;
       INBOX_JAMES_MAIL_REPOSITORY_EVENTS = _INBOX_JAMES_MAIL_REPOSITORY_EVENTS_;
     });
 
-    inboxJamesDlpService.getMailRepositoryPath = function() {
-      return REPOSITORY_PATH;
-    };
+    session.domain._id = DOMAIN_ID;
   });
 
   function initController(options) {
@@ -62,7 +68,7 @@ describe('The inboxJamesDlpRejectedActionsController', function() {
           email: {}
         });
 
-        jamesWebadminClient.reprocessMailFromMailRepository = function() {
+        jamesApiClientMock.reprocessMailFromMailRepository = function() {
           return $q.when();
         };
 
@@ -76,18 +82,20 @@ describe('The inboxJamesDlpRejectedActionsController', function() {
       });
 
       it('should reject if failed to quarantine quarantined email', function(done) {
-        var email = { name: '1234567' };
+        var email = { repository: 'a', name: 'b' };
         var controller = initController({
           onClick: function() {},
           email: email
         });
 
-        jamesWebadminClient.reprocessMailFromMailRepository = sinon.stub().returns($q.reject());
+        jamesApiClientMock.reprocessMailFromMailRepository = sinon.stub().returns($q.reject());
 
         controller.onQuarantineBtnClick()
           .catch(function() {
-            expect(jamesWebadminClient.reprocessMailFromMailRepository).to.have.been.calledWith(
-              REPOSITORY_PATH,
+            expect(jamesApiClientMock.reprocessMailFromMailRepository).to.have.been.calledOnce;
+            expect(jamesApiClientMock.reprocessMailFromMailRepository).to.have.been.calledWith(
+              DOMAIN_ID,
+              email.repository,
               email.name,
               { processor: INBOX_JAMES_MAIL_REPOSITORY_PROCESSORS.QUARANTINE }
             );
@@ -104,13 +112,14 @@ describe('The inboxJamesDlpRejectedActionsController', function() {
           email: email
         });
 
-        jamesWebadminClient.reprocessMailFromMailRepository = sinon.stub().returns($q.when());
+        jamesApiClientMock.reprocessMailFromMailRepository = sinon.stub().returns($q.when());
         $rootScope.$broadcast = sinon.spy();
 
         controller.onQuarantineBtnClick()
           .then(function() {
-            expect(jamesWebadminClient.reprocessMailFromMailRepository).to.have.been.calledWith(
-              REPOSITORY_PATH,
+            expect(jamesApiClientMock.reprocessMailFromMailRepository).to.have.been.calledWith(
+              DOMAIN_ID,
+              email.repository,
               email.name,
               { processor: INBOX_JAMES_MAIL_REPOSITORY_PROCESSORS.QUARANTINE }
             );
@@ -127,17 +136,29 @@ describe('The inboxJamesDlpRejectedActionsController', function() {
 
     describe('Multiple emails', function() {
       it('should reject if failed to quarantine quarantined emails', function(done) {
-        var email = { name: 'mailKey' };
+        var emails = [
+          { repository: 'a1', name: 'b1' },
+          { repository: 'a2', name: 'b2' }
+        ];
         var controller = initController();
 
-        jamesWebadminClient.reprocessMailFromMailRepository = sinon.stub().returns($q.reject());
-        inboxJamesMailRepositoryEmailSelection.getSelected = sinon.stub().returns([email]);
+        jamesApiClientMock.reprocessMailFromMailRepository = sinon.stub().returns($q.reject());
+        inboxJamesMailRepositoryEmailSelection.getSelected = sinon.stub().returns(emails);
 
         controller.onQuarantineBtnClick()
           .catch(function() {
-            expect(jamesWebadminClient.reprocessMailFromMailRepository).to.have.been.calledWith(
-              REPOSITORY_PATH,
-              email.name,
+            expect(inboxJamesMailRepositoryEmailSelection.getSelected).to.have.been.calledOnce;
+            expect(jamesApiClientMock.reprocessMailFromMailRepository).to.have.been.calledTwice;
+            expect(jamesApiClientMock.reprocessMailFromMailRepository).to.have.been.calledWith(
+              DOMAIN_ID,
+              emails[0].repository,
+              emails[0].name,
+              { processor: INBOX_JAMES_MAIL_REPOSITORY_PROCESSORS.QUARANTINE }
+            );
+            expect(jamesApiClientMock.reprocessMailFromMailRepository).to.have.been.calledWith(
+              DOMAIN_ID,
+              emails[1].repository,
+              emails[1].name,
               { processor: INBOX_JAMES_MAIL_REPOSITORY_PROCESSORS.QUARANTINE }
             );
             done();
@@ -148,26 +169,28 @@ describe('The inboxJamesDlpRejectedActionsController', function() {
 
       it('should resolve if success to quarantine quarantined emails', function(done) {
         var emails = [
-          { name: 'mailKey1' },
-          { name: 'mailKey2' }
+          { repository: 'a1', name: 'b1' },
+          { repository: 'a2', name: 'b2' }
         ];
         var controller = initController();
 
-        jamesWebadminClient.reprocessMailFromMailRepository = sinon.stub().returns($q.when());
+        jamesApiClientMock.reprocessMailFromMailRepository = sinon.stub().returns($q.when());
         inboxJamesMailRepositoryEmailSelection.getSelected = sinon.stub().returns(emails);
         $rootScope.$broadcast = sinon.spy();
 
         controller.onQuarantineBtnClick()
           .then(function() {
             expect(inboxJamesMailRepositoryEmailSelection.getSelected).to.have.been.calledOnce;
-            expect(jamesWebadminClient.reprocessMailFromMailRepository).to.have.been.calledTwice;
-            expect(jamesWebadminClient.reprocessMailFromMailRepository).to.have.been.calledWith(
-              REPOSITORY_PATH,
+            expect(jamesApiClientMock.reprocessMailFromMailRepository).to.have.been.calledTwice;
+            expect(jamesApiClientMock.reprocessMailFromMailRepository).to.have.been.calledWith(
+              DOMAIN_ID,
+              emails[0].repository,
               emails[0].name,
               { processor: INBOX_JAMES_MAIL_REPOSITORY_PROCESSORS.QUARANTINE }
             );
-            expect(jamesWebadminClient.reprocessMailFromMailRepository).to.have.been.calledWith(
-              REPOSITORY_PATH,
+            expect(jamesApiClientMock.reprocessMailFromMailRepository).to.have.been.calledWith(
+              DOMAIN_ID,
+              emails[1].repository,
               emails[1].name,
               { processor: INBOX_JAMES_MAIL_REPOSITORY_PROCESSORS.QUARANTINE }
             );
@@ -184,15 +207,22 @@ describe('The inboxJamesDlpRejectedActionsController', function() {
 
     describe('All emails', function() {
       it('should reject if failed to quarantine all quarantined emails', function(done) {
-        var controller = initController();
+        var email = { repository: 'a' };
 
-        jamesWebadminClient.reprocessAllMailsFromMailRepository = sinon.stub().returns($q.reject());
+        var controller = initController({
+          onClick: function() {},
+          email: email
+        });
+
+        jamesApiClientMock.reprocessAllMailsFromMailRepository = sinon.stub().returns($q.reject());
 
         controller.bulkAction = true;
         controller.onQuarantineBtnClick()
           .catch(function() {
-            expect(jamesWebadminClient.reprocessAllMailsFromMailRepository).to.have.been.calledWith(
-              REPOSITORY_PATH,
+            expect(jamesApiClientMock.reprocessAllMailsFromMailRepository).to.have.been.calledOnce;
+            expect(jamesApiClientMock.reprocessAllMailsFromMailRepository).to.have.been.calledWith(
+              DOMAIN_ID,
+              email.repository,
               { processor: INBOX_JAMES_MAIL_REPOSITORY_PROCESSORS.QUARANTINE }
             );
             done();
@@ -202,16 +232,23 @@ describe('The inboxJamesDlpRejectedActionsController', function() {
       });
 
       it('should resolve if success to quarantine all quarantined emails', function(done) {
-        var controller = initController();
+        var email = { repository: 'a' };
 
-        jamesWebadminClient.reprocessAllMailsFromMailRepository = sinon.stub().returns($q.when());
+        var controller = initController({
+          onClick: function() {},
+          email: email
+        });
+
+        jamesApiClientMock.reprocessAllMailsFromMailRepository = sinon.stub().returns($q.when());
         $rootScope.$broadcast = sinon.spy();
 
         controller.bulkAction = true;
         controller.onQuarantineBtnClick()
           .then(function() {
-            expect(jamesWebadminClient.reprocessAllMailsFromMailRepository).to.have.been.calledWith(
-              REPOSITORY_PATH,
+            expect(jamesApiClientMock.reprocessAllMailsFromMailRepository).to.have.been.calledOnce;
+            expect(jamesApiClientMock.reprocessAllMailsFromMailRepository).to.have.been.calledWith(
+              DOMAIN_ID,
+              email.repository,
               { processor: INBOX_JAMES_MAIL_REPOSITORY_PROCESSORS.QUARANTINE }
             );
             expect($rootScope.$broadcast).to.have.been.calledWith(INBOX_JAMES_MAIL_REPOSITORY_EVENTS.ALL_MAILS_REMOVED);

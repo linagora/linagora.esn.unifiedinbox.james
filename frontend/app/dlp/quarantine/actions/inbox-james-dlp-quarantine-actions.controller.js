@@ -8,15 +8,14 @@
     $q,
     $rootScope,
     asyncAction,
-    jamesWebadminClient,
-    inboxJamesDlpService,
+    jamesApiClient,
     inboxJamesMailRepositoryEmailSelection,
+    session,
     INBOX_JAMES_MAIL_REPOSITORY_PROCESSORS,
-    INBOX_JAMES_DLP_MAIL_REPOSITORY_PATH_PREFIXES,
     INBOX_JAMES_MAIL_REPOSITORY_EVENTS
   ) {
     var self = this;
-    var repositoryId = inboxJamesDlpService.getMailRepositoryPath(INBOX_JAMES_DLP_MAIL_REPOSITORY_PATH_PREFIXES.QUARANTINE);
+    var DOMAIN_ID = session.domain._id;
     var DENY_MESSAGES = {
       progressing: 'Moving mails...',
       success: 'Emails moved to rejected repository',
@@ -47,8 +46,9 @@
       if (self.onClick) self.onClick();
 
       if (self.bulkAction) {
-        return jamesWebadminClient.reprocessAllMailsFromMailRepository(
-          repositoryId,
+        return jamesApiClient.reprocessAllMailsFromMailRepository(
+          DOMAIN_ID,
+          self.email.repository,
           { processor: processor }
         ).then(function() {
           $rootScope.$broadcast(INBOX_JAMES_MAIL_REPOSITORY_EVENTS.ALL_MAILS_REMOVED);
@@ -58,8 +58,9 @@
       var selectedEmails = self.email ? [self.email] : inboxJamesMailRepositoryEmailSelection.getSelected();
 
       return $q.all(selectedEmails.map(function(email) {
-        return jamesWebadminClient.reprocessMailFromMailRepository(
-          repositoryId,
+        return jamesApiClient.reprocessMailFromMailRepository(
+          DOMAIN_ID,
+          email.repository,
           email.name,
           { processor: processor }
         );

@@ -8,8 +8,7 @@
     session,
     esnI18nService,
     jamesApiClient,
-    inboxJamesDlpService,
-    INBOX_JAMES_DLP_MAIL_REPOSITORY_PATH_PREFIXES
+    INBOX_JAMES_DLP_MAIL_REPOSITORIES
   ) {
     var self = this;
 
@@ -17,8 +16,8 @@
 
     function $onInit() {
       var repositoriesToDisplay = [
-        inboxJamesDlpService.getMailRepositoryPath(INBOX_JAMES_DLP_MAIL_REPOSITORY_PATH_PREFIXES.QUARANTINE),
-        inboxJamesDlpService.getMailRepositoryPath(INBOX_JAMES_DLP_MAIL_REPOSITORY_PATH_PREFIXES.REJECTED)
+        INBOX_JAMES_DLP_MAIL_REPOSITORIES.QUARANTINE,
+        INBOX_JAMES_DLP_MAIL_REPOSITORIES.REJECTED
       ];
 
       self.shouldDisplay = self.email.attributes &&

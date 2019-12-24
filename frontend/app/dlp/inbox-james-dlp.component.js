@@ -3,7 +3,7 @@
 
   angular.module('linagora.esn.unifiedinbox.james')
     .component('inboxJamesDlp', {
-      templateUrl: '/linagora.esn.unifiedinbox.james/app/dlp/inbox-james-dlp.html',
+      templateUrl: '/unifiedinbox.james/app/dlp/inbox-james-dlp.html',
       bindings: {
         displayIn: '<'
       }

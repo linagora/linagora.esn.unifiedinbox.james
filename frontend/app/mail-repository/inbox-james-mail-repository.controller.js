@@ -10,13 +10,16 @@
     infiniteScrollHelper,
     inboxJamesMailRepository,
     inboxJamesMailRepositoryEmailSelection,
+    ELEMENTS_PER_REQUEST,
     INBOX_JAMES_MAIL_REPOSITORY_EVENTS,
     INBOX_JAMES_MAIL_REPOSITORY_MAIL_DELETION_TARGET
   ) {
     var self = this;
+    var DEFAULT_LIMIT = ELEMENTS_PER_REQUEST || 20;
+
     var options = {
       offset: 0,
-      limit: 20
+      limit: DEFAULT_LIMIT
     };
 
     self.$onInit = $onInit;
@@ -25,7 +28,7 @@
     self.deleteMail = deleteMail;
 
     function $onInit() {
-      self.loadMoreElements = infiniteScrollHelper(self, _loadNextItems);
+      self.loadMoreElements = infiniteScrollHelper(self, _loadNextItems, null, DEFAULT_LIMIT);
 
       $scope.$on(INBOX_JAMES_MAIL_REPOSITORY_EVENTS.MAILS_REMOVED, _removeMailsFromList);
       $scope.$on(INBOX_JAMES_MAIL_REPOSITORY_EVENTS.ALL_MAILS_REMOVED, _removeAllMailsFromList);

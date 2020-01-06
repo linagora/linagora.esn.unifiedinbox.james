@@ -50,7 +50,8 @@ describe('The inboxJamesDlpRejectedActionsController', function() {
       { $scope: $scope },
       {
         email: options.email,
-        onClick: options.onClick
+        onClick: options.onClick,
+        repository: options.repository
       }
     );
 
@@ -207,11 +208,11 @@ describe('The inboxJamesDlpRejectedActionsController', function() {
 
     describe('All emails', function() {
       it('should reject if failed to quarantine all quarantined emails', function(done) {
-        var email = { repository: 'a' };
+        var repository = 'a';
 
         var controller = initController({
           onClick: function() {},
-          email: email
+          repository: repository
         });
 
         jamesApiClientMock.reprocessAllMailsFromMailRepository = sinon.stub().returns($q.reject());
@@ -222,7 +223,7 @@ describe('The inboxJamesDlpRejectedActionsController', function() {
             expect(jamesApiClientMock.reprocessAllMailsFromMailRepository).to.have.been.calledOnce;
             expect(jamesApiClientMock.reprocessAllMailsFromMailRepository).to.have.been.calledWith(
               DOMAIN_ID,
-              email.repository,
+              repository,
               { processor: INBOX_JAMES_MAIL_REPOSITORY_PROCESSORS.QUARANTINE }
             );
             done();
@@ -232,11 +233,11 @@ describe('The inboxJamesDlpRejectedActionsController', function() {
       });
 
       it('should resolve if success to quarantine all quarantined emails', function(done) {
-        var email = { repository: 'a' };
+        var repository = 'a';
 
         var controller = initController({
           onClick: function() {},
-          email: email
+          repository: repository
         });
 
         jamesApiClientMock.reprocessAllMailsFromMailRepository = sinon.stub().returns($q.when());
@@ -248,7 +249,7 @@ describe('The inboxJamesDlpRejectedActionsController', function() {
             expect(jamesApiClientMock.reprocessAllMailsFromMailRepository).to.have.been.calledOnce;
             expect(jamesApiClientMock.reprocessAllMailsFromMailRepository).to.have.been.calledWith(
               DOMAIN_ID,
-              email.repository,
+              repository,
               { processor: INBOX_JAMES_MAIL_REPOSITORY_PROCESSORS.QUARANTINE }
             );
             expect($rootScope.$broadcast).to.have.been.calledWith(INBOX_JAMES_MAIL_REPOSITORY_EVENTS.ALL_MAILS_REMOVED);

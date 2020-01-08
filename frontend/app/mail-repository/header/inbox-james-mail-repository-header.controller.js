@@ -43,7 +43,7 @@
 
     function selectRepository() {
       self.repositorySelected = true;
-      self.selectedAllEmails = true;
+      self.bulkAction = true;
 
       _toggleSelectAll(self.repositorySelected);
     }

@@ -8,7 +8,8 @@
       bindings: {
         bulkAction: '<',
         email: '<',
-        onClick: '&'
+        onClick: '&',
+        repository: '<'
       }
     });
 })(angular);

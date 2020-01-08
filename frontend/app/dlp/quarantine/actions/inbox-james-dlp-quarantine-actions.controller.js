@@ -48,7 +48,7 @@
       if (self.bulkAction) {
         return jamesApiClient.reprocessAllMailsFromMailRepository(
           DOMAIN_ID,
-          self.email.repository,
+          self.repository,
           { processor: processor }
         ).then(function() {
           $rootScope.$broadcast(INBOX_JAMES_MAIL_REPOSITORY_EVENTS.ALL_MAILS_REMOVED);

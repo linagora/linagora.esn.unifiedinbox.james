@@ -11,8 +11,6 @@ describe('The UnifiedInboxRestoringDeletedMessagesRequests model', function() {
     ObjectId = mongoose.Types.ObjectId;
 
     RESTORING_MESSAGES_REQUEST = require(`${this.testEnv.backendPath}/lib/constants`).RESTORING_MESSAGES_REQUEST;
-
-    require(`${this.testEnv.backendPath}/lib/db`)(this.moduleHelpers.dependencies);
     UnifiedInboxRestoringDeletedMessagesRequests = mongoose.model('UnifiedInboxRestoringDeletedMessagesRequests');
 
     this.connectMongoose(mongoose, done);

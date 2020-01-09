@@ -61,7 +61,15 @@ before(function(done) {
 before(function() {
   mockery.enable({ warnOnReplace: false, warnOnUnregistered: false, useCleanCache: true });
   const depsStore = {
-    db: require('linagora-rse/backend/core/db')
+    db: require('linagora-rse/backend/core/db'),
+    pubsub: {
+      local: {
+        topic: () => ({
+          publish: () => {},
+          subscribe: () => {}
+        })
+      }
+    }
   };
   const dependencies = name => depsStore[name];
 

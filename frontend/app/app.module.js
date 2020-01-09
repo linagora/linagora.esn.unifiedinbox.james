@@ -17,6 +17,7 @@
     'esn.session',
     'esn.infinite-list',
     'esn.i18n',
+    'esn.scroll',
     'mgcrea.ngStrap.modal',
     'linagora.esn.james',
     'linagora.esn.unifiedinbox'

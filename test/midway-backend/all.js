@@ -57,26 +57,9 @@ before(function(done) {
 before(function(done) {
   const self = this;
 
-  self.helpers.modules.initMidway(AWESOME_MODULE_NAME, self.helpers.callbacks.noErrorAnd(() => {
-    const expressApp = require(`${self.testEnv.backendPath}/webserver/application`)(self.helpers.modules.current.deps);
-    const api = require(`${self.testEnv.backendPath}/webserver/api`)(self.helpers.modules.current.deps, self.helpers.modules.current.lib.lib);
+  self.helpers.modules.initMidway(AWESOME_MODULE_NAME, error => {
+    if (error) return done(error);
 
-    expressApp.use(require('body-parser').json());
-    expressApp.use(`/${MODULE_NAME}/api`, api);
-    self.helpers.modules.current.app = self.helpers.modules.getWebServer(expressApp);
-
-    done();
-  }));
-});
-
-afterEach(function(done) {
-  this.helpers.mongo.dropDatabase(done);
-});
-
-before(function(done) {
-  const self = this;
-
-  self.helpers.modules.initMidway(MODULE_NAME, self.helpers.callbacks.noErrorAnd(() => {
     const expressApp = require(`${self.testEnv.backendPath}/webserver/application`)(self.helpers.modules.current.deps);
     const api = require(`${self.testEnv.backendPath}/webserver/api`)(self.helpers.modules.current.deps, self.helpers.modules.current.lib.lib);
 
@@ -86,7 +69,7 @@ before(function(done) {
     self.helpers.modules.current.lib.lib.init();
 
     done();
-  }));
+  });
 });
 
 afterEach(function(done) {

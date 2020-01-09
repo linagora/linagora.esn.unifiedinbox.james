@@ -10,24 +10,13 @@
     self.$onInit = $onInit;
     self.addCriterion = addCriterion;
     self.deleteCriterion = deleteCriterion;
-    self.onSelectAllToggleChange = onSelectAllToggleChange;
 
     function $onInit() {
-      self.selectAll = !self.criteria.length;
-      self.displayedCriteria = self.criteria || [];
-    }
-
-    function onSelectAllToggleChange() {
-      if (self.selectAll) {
-        self.criteria = [];
-      } else {
-        self.criteria = self.displayedCriteria;
-      }
+      self.criteria = self.criteria || [];
     }
 
     function addCriterion() {
-      self.displayedCriteria.push(_.clone(INBOX_JAMES_DELETED_MESSAGES.CRITERIA.DEFAULT_CRITERION));
-      self.criteria = self.displayedCriteria;
+      self.criteria.push(_.clone(INBOX_JAMES_DELETED_MESSAGES.CRITERIA.DEFAULT_CRITERION));
 
       $timeout(function() {
         elementScrollService.scrollDownToElement($(_.last($element.find('inbox-james-deleted-messages-criteria-item'))));
@@ -35,8 +24,7 @@
     }
 
     function deleteCriterion(index) {
-      self.displayedCriteria.splice(index, 1);
-      self.criteria = self.displayedCriteria;
+      self.criteria.splice(index, 1);
     }
   }
 })(angular);

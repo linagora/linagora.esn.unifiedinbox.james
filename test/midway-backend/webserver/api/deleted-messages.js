@@ -157,6 +157,25 @@ describe('The create restoring deleted messages request: POST /restoringDeletedM
     });
   });
 
+  it('should return 400 if criteria is an empty array', function(done) {
+    helpers.api.loginAsUser(app, user.emails[0], password, (err, requestAsMember) => {
+      expect(err).to.not.exist;
+      const req = requestAsMember(request(app).post('/unifiedinbox.james/api/restoringDeletedMessagesRequest'));
+
+      req.send({
+        targetUser: user._id,
+        content: { combinator: 'and', criteria: [] }
+      });
+      req.expect(400);
+      req.end((err, res) => {
+        expect(err).to.not.exist;
+        expect(res.body.error.details).to.equal('.criteria: should NOT have fewer than 1 items');
+
+        done();
+      });
+    });
+  });
+
   it('should return 400 if criterion does not have "operator" property', function(done) {
     helpers.api.loginAsUser(app, user.emails[0], password, (err, requestAsMember) => {
       expect(err).to.not.exist;

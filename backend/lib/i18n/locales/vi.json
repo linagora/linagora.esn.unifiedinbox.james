@@ -101,5 +101,11 @@
   "the date": "ngày",
   "Delivery date": "Ngày gửi",
   "Deletion date": "Ngày xóa",
-  "Restored-Messages": "Thư được phục hồi"
+  "Restored-Messages": "Thư được phục hồi",
+  "Report: Deleted messages restoration result": "Báo cáo: Kết quả phục hồi thư đã xóa",
+  "Deleted messages restoration result": "Kết quả phục hồi thư đã xóa",
+  "Number of successfully restored messages:": "Số lượng thư phục hồi thành công:",
+  "Number of failed restoring messages:": "Số lượng thư phục hồi thất bại:",
+  "You can find the restored messages inside mailbox": "Bạn có thể xem những thư được phục hồi trong hòm thư",
+  "In case of any restoration failure, please contact your domain administrator for more details.": "Trong trường hợp thư phục hồi thất bại, vui lòng liên hệ quản trị miền của bạn để biết thêm chi tiết."
 }

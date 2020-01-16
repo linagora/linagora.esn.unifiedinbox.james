@@ -1,4 +1,4 @@
-const { WORKER_NAME } = require('../../constants').MONITOR_MESSAGE_RESTORING;
+const { WORKER_NAME } = require('../../constants').MONITOR_MESSAGES_RESTORING;
 
 module.exports = depedencies => {
   const jobqueue = depedencies('jobqueue');

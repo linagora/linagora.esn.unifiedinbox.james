@@ -1,10 +1,17 @@
-const { WORKER_NAME, CALL_INTERVAL, TASK_STATUS } = require('../../constants').MONITOR_MESSAGE_RESTORING;
-const util = require('util');
+const {
+  WORKER_NAME,
+  CALL_INTERVAL,
+  TASK_STATUS,
+  MAILBOX_NAME,
+  REPORT_EMAIL_SUBJECT
+} = require('../../constants').MONITOR_MESSAGES_RESTORING;
+const { promisify } = require('util');
 
 module.exports = dependencies => {
   const jamesModule = dependencies('james');
   const logger = dependencies('logger');
   const userModule = dependencies('user');
+  const emailSender = require('../../email-sender')(dependencies);
 
   return {
     name: WORKER_NAME,
@@ -19,6 +26,7 @@ module.exports = dependencies => {
 
     return _resolveUser(targetUser)
       .then(user => _checkTaskPeriodically({ taskId, user }))
+      .then(_sendReport)
       .catch(error => {
         logger.error('Checking deleted messages restoration failed: ', error);
 
@@ -47,8 +55,17 @@ module.exports = dependencies => {
     });
   }
 
+  function _sendReport({ task, user }) {
+    return emailSender.send({
+      user,
+      subject: REPORT_EMAIL_SUBJECT,
+      emailTemplateName: 'deleted-messages.report',
+      content: { ...task.additionalInformation, mailboxName: MAILBOX_NAME }
+    });
+  }
+
   function _resolveUser(userId) {
-    return util.promisify(userModule.get)(userId)
+    return promisify(userModule.get)(userId)
       .then(user => {
         if (user) return user;
 

@@ -7,6 +7,7 @@ module.exports = dependencies => {
   const mongoose = dependencies('db').mongo.mongoose;
   const coreUser = dependencies('user');
   const RestoringRequest = mongoose.model('UnifiedInboxRestoringDeletedMessagesRequests');
+  const { startMonitoring } = require('./monitoring')(dependencies);
 
   return {
     init,
@@ -29,7 +30,7 @@ module.exports = dependencies => {
     _getTargetEmailFromRestoringRequest(request)
       .then(email => {
         jamesModule.lib.client.restoreDeletedMessages(email, request.content)
-          .then(data => logger.info(`Success to send restore request to James, Task Id: ${data.taskId}`))
+          .then(data => startMonitoring({ taskId: data.taskId, targetUser: request.targetUser }))
           .catch(err => logger.error('Failed to send restore request to James', err));
       });
   }

@@ -3,7 +3,7 @@
 
   angular.module('linagora.esn.unifiedinbox.james')
 
-  .config(function($stateProvider, $urlRouterProvider) {
+  .config(function($stateProvider) {
     $stateProvider
       .state('admin.domain.dlp', {
         url: '/dlp',

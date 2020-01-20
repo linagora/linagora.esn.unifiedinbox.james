@@ -57,7 +57,7 @@
       }
     }
 
-    function _removeAllMailsFromList(event) {
+    function _removeAllMailsFromList() {
       self.elements.length = 0;
       inboxJamesMailRepositoryEmailSelection.unSelectAll();
     }

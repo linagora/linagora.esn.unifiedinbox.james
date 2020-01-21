@@ -18,10 +18,10 @@ module.exports = dependencies => {
     fieldName: { type: String, required: true },
     operator: { type: String, required: true },
     value: { type: String, required: true }
-  });
+  }, {_id: false});
 
   /**
-   * UnifiedInboxRestoringMessagesRequests schema
+   * UnifiedInboxRestoringDeletedMessagesRequests schema
    *
    * targetUser: The user whose messages are restored
    * issuer: The user who reviewed the request
@@ -33,7 +33,7 @@ module.exports = dependencies => {
    * createdAt: creation time
    * updatedAt: update time
    */
-  const UnifiedInboxRestoringMessagesRequestsSchema = new mongoose.Schema({
+  const UnifiedInboxRestoringDeletedMessagesRequestsSchema = new mongoose.Schema({
     targetUser: { type: mongoose.Schema.ObjectId, ref: 'User', required: true },
     issuer: { type: mongoose.Schema.ObjectId, ref: 'User' },
     content: {
@@ -52,5 +52,5 @@ module.exports = dependencies => {
     message: { type: String }
   }, { timestamps: true });
 
-  module.exports = mongoose.model('UnifiedInboxRestoringMessagesRequests', UnifiedInboxRestoringMessagesRequestsSchema);
+  module.exports = mongoose.model('UnifiedInboxRestoringDeletedMessagesRequests', UnifiedInboxRestoringDeletedMessagesRequestsSchema);
 };

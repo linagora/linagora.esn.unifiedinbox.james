@@ -6,7 +6,7 @@ var expect = chai.expect;
 
 describe('The inboxJamesMailRepositoryEmailDeleteDialogController controller', function() {
   var $controller, $rootScope;
-  var inboxJamesMailRepository, asyncAction;
+  var inboxJamesMailRepository, asyncAction; //eslint-disable-line no-unused-vars
 
   beforeEach(module('linagora.esn.unifiedinbox.james'));
 

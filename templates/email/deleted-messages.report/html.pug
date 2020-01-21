@@ -1,0 +1,35 @@
+doctype html
+html.mail
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    style
+      include ../css/media.less
+
+  body
+    .wrapper
+      br
+      .mail-content
+        table
+          tr
+            td(colspan='6')
+              a(href=content.baseUrl)
+                img(src='cid:logo', alt='OpenPaas Logo')
+          tr
+            td(colspan='6').notification-message.indent
+              span.title #{translate('Deleted messages restoration result')}
+          tr
+            td.indent
+              span #{translate('Number of successfully restored messages:')}
+              span.left-space #{content.successfulRestoreCount}
+          tr
+            td.indent
+              span #{translate('Number of failed restoring messages:')}
+              span.left-space #{content.errorRestoreCount}
+          tr
+            td.indent(colspan='6')
+              span #{translate('You can find the restored messages inside mailbox')}
+              b.left-space #{translate(content.mailboxName)}
+          tr
+            td.indent(colspan='6')
+              span #{translate('In case of any restoration failure, please contact your domain administrator for more details.')}

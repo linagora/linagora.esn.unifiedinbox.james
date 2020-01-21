@@ -1,5 +1,3 @@
-'use strict';
-
 /* eslint-disable no-console, no-process-env */
 
 const chai = require('chai');
@@ -46,11 +44,12 @@ before(function(done) {
   const nodeModulesPath = path.normalize(
     path.join(__dirname, '../../node_modules/')
   );
-  const nodeModulesLoader = manager.loaders.filesystem(nodeModulesPath, true);
-  const loader = manager.loaders.code(require('../../index.js'), true);
 
-  manager.appendLoader(nodeModulesLoader);
+  const loader = manager.loaders.code(require('../../index.js'), true);
+  const nodeModulesLoader = manager.loaders.filesystem(nodeModulesPath, true);
+
   manager.appendLoader(loader);
+  manager.appendLoader(nodeModulesLoader);
 
   loader.load(AWESOME_MODULE_NAME, done);
 });
@@ -58,18 +57,21 @@ before(function(done) {
 before(function(done) {
   const self = this;
 
-  self.helpers.modules.initMidway(AWESOME_MODULE_NAME, self.helpers.callbacks.noErrorAnd(() => {
+  self.helpers.modules.initMidway(AWESOME_MODULE_NAME, error => {
+    if (error) return done(error);
+
     const expressApp = require(`${self.testEnv.backendPath}/webserver/application`)(self.helpers.modules.current.deps);
     const api = require(`${self.testEnv.backendPath}/webserver/api`)(self.helpers.modules.current.deps, self.helpers.modules.current.lib.lib);
 
     expressApp.use(require('body-parser').json());
-    expressApp.use(`/${MODULE_NAME}/api`, api);
+    expressApp.use('/unifiedinbox.james/api', api);
     self.helpers.modules.current.app = self.helpers.modules.getWebServer(expressApp);
+    self.helpers.modules.current.lib.lib.init();
 
     done();
-  }));
+  });
 });
 
 afterEach(function(done) {
-  this.helpers.mongo.dropDatabase(done);
+  this.helpers.mongo.dropDatabase(err => done(err));
 });

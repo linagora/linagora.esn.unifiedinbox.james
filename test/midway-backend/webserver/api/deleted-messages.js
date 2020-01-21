@@ -321,7 +321,7 @@ describe('The create restoring deleted messages request: POST /restoringDeletedM
         message: 'I want to recover my emails'
       });
       req.expect(204);
-      req.end((err, res) => {
+      req.end(err => {
         expect(err).to.not.exist;
 
         done();

@@ -101,5 +101,11 @@
   "the date": "the date",
   "Delivery date": "Delivery date",
   "Deletion date": "Deletion date",
-  "Restored-Messages": "Restored-Messages"
+  "Restored-Messages": "Restored-Messages",
+  "Report: Deleted messages restoration result": "Report: Deleted messages restoration result",
+  "Deleted messages restoration result": "Deleted messages restoration result",
+  "Number of successfully restored messages:": "Number of successfully restored messages:",
+  "Number of failed restoring messages:": "Number of failed restoring messages:",
+  "You can find the restored messages inside mailbox": "You can find the restored messages inside mailbox",
+  "In case of any restoration failure, please contact your domain administrator for more details.": "In case of any restoration failure, please contact your domain administrator for more details."
 }
